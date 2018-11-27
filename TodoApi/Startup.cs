@@ -6,6 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Domain;
 using Repositories;
+using System.IO;
+using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.Reflection;
 
 namespace TodoApi
 {
@@ -31,17 +35,19 @@ namespace TodoApi
                     //允许所有来源，允许所有HTTP方法，允许所有作者的请求标头
                 });
             });
-            services.AddDbContext<TodoContext>(opt =>
-            {
-                opt.UseInMemoryDatabase("TodoList");
-            });
             services.AddDbContext<ManageContext>(opt =>
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"));
             });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "ManageApi", Version = "v1" });
+                var xmlFile = $"{Assembly.GetEntryAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
 
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -53,6 +59,11 @@ namespace TodoApi
             {
                 app.UseHsts();
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ManageApi");
+            });
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseHttpsRedirection();
             app.UseMvc();
