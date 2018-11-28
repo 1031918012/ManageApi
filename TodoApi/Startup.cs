@@ -10,21 +10,42 @@ using System.IO;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Reflection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace TodoApi
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public IConfiguration Configuration { get; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                //设置时间格式
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddCors(options =>
             {
@@ -48,6 +69,11 @@ namespace TodoApi
             });
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -59,7 +85,7 @@ namespace TodoApi
             {
                 app.UseHsts();
             }
-            app.UseSwagger();
+            app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ManageApi");
