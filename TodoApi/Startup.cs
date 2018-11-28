@@ -12,6 +12,7 @@ using System;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Service;
 
 namespace TodoApi
 {
@@ -39,13 +40,6 @@ namespace TodoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddJsonOptions(options =>
-            {
-                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                //设置时间格式
-                options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
-            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddCors(options =>
             {
@@ -67,7 +61,10 @@ namespace TodoApi
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
-
+            services.AddScoped<IManageService, ManageService>();
+            services.AddScoped<IManageReposotory, ManageRepository>();
+            services.AddScoped<ISalaryUnitOfWork, SalaryUnitOfWork>();
+            services.AddScoped<IRepositories<IManage>, EFRepositories<IManage>>();
         }
         /// <summary>
         /// 
@@ -85,7 +82,7 @@ namespace TodoApi
             {
                 app.UseHsts();
             }
-            app.UseSwagger();
+            app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ManageApi");

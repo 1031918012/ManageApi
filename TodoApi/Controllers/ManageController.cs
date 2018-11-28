@@ -43,7 +43,7 @@ namespace TodoApi.Controllers
                 Price = price
             };
             var result = _service.Add(manage);
-            return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = false, Message = "添加成功" });
+            return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = result, Message = "添加成功" });
         }
     }
 }

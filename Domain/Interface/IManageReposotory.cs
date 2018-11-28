@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Domain
 {
-    public interface IManageReposotorie : IRepositories<ManageItem>
+    public interface IManageReposotory : IRepositories<ManageItem>
     {
 
     }

@@ -5,7 +5,7 @@ using Domain;
 
 namespace Repositories
 {
-    class SalaryUnitOfWork : ISalaryUnitOfWork
+    public class SalaryUnitOfWork : ISalaryUnitOfWork
     {
         private readonly ManageContext _context;
 
