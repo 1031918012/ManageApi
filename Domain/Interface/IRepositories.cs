@@ -1,6 +1,6 @@
 ﻿using Domain;
 
-namespace Repositories
+namespace Domain
 {
     public interface IRepositories<TManage> where TManage : class,IManage
     {

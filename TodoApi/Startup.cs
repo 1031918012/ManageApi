@@ -85,7 +85,7 @@ namespace TodoApi
             {
                 app.UseHsts();
             }
-            app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
+            app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ManageApi");

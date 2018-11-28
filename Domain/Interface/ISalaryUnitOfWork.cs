@@ -7,6 +7,6 @@ namespace Domain
 {
     public interface ISalaryUnitOfWork:IUnitOfWork
     {
-        public void Add<TManage>(TManage manage) where TManage : class, IManage;
+        void Add<TManage>(TManage manage) where TManage : class, IManage;
     }
 }

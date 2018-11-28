@@ -4,16 +4,28 @@
         <name>ManageApi</name>
     </assembly>
     <members>
-        <member name="T:TodoApi.Controllers.ValuesController">
+        <member name="T:TodoApi.Controllers.ManageController">
             <summary>
             
             </summary>
         </member>
-        <member name="M:TodoApi.Controllers.ValuesController.Get(System.Int32)">
+        <member name="F:TodoApi.Controllers.ManageController._service">
             <summary>
-            获取方法
+            
             </summary>
-            <param name="id">id</param>
+        </member>
+        <member name="M:TodoApi.Controllers.ManageController.#ctor(Service.IManageService)">
+            <summary>
+            
+            </summary>
+            <param name="service"></param>
+        </member>
+        <member name="M:TodoApi.Controllers.ManageController.Add(System.String,System.String)">
+            <summary>
+            添加
+            </summary>
+            <param name="name">名字</param>
+            <param name="price">价格</param>
             <returns></returns>
         </member>
         <member name="T:TodoApi.Program">

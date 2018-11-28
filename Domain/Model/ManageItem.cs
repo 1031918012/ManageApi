@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class ManageItem
+    public class ManageItem:IManage
     {
         public Guid ID { get; set; } 
         public string Name { get; set; }
