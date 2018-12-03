@@ -14,11 +14,12 @@
             
             </summary>
         </member>
-        <member name="M:TodoApi.Controllers.ManageController.#ctor(Service.IManageService)">
+        <member name="M:TodoApi.Controllers.ManageController.#ctor(Service.IManageService,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
             <summary>
             
             </summary>
             <param name="service"></param>
+            <param name="hostingEnvironment"></param>
         </member>
         <member name="M:TodoApi.Controllers.ManageController.Add(System.String,System.String)">
             <summary>
@@ -26,6 +27,18 @@
             </summary>
             <param name="name">名字</param>
             <param name="price">价格</param>
+            <returns></returns>
+        </member>
+        <member name="M:TodoApi.Controllers.ManageController.OutPut">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TodoApi.Controllers.ManageController.Export">
+            <summary>
+            
+            </summary>
             <returns></returns>
         </member>
         <member name="T:TodoApi.Program">

@@ -1,6 +1,9 @@
 ﻿using Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Repositories
@@ -11,6 +14,12 @@ namespace Repositories
         public EFRepositories(ManageContext context)
         {
             _context = context;
+        }
+        public IEnumerable<TManage> MyCompileQuery(Expression<Func<TManage, bool>> exp)
+        {
+            exp = exp ?? (s => 1 == 1);
+            var func = EF.CompileQuery((DbContext context) => context.Set<TManage>().Where(exp));
+            return func(_context);
         }
     }
 }

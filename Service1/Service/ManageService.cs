@@ -1,5 +1,6 @@
 ﻿using Domain;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Service
@@ -16,6 +17,10 @@ namespace Service
         {
             _salaryUnitOfWork.Add(manage);
            return _salaryUnitOfWork.Commit();
+        }
+        public List<ManageItem> SelectList()
+        {
+            return _manage.MyCompileQuery(s => s.ID != null).ToList();
         }
     }
 }
