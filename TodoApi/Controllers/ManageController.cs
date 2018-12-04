@@ -46,7 +46,7 @@ namespace TodoApi.Controllers
         /// <param name="creator">创建人</param>
         /// <returns></returns>
         [HttpPost("Add")]
-        public string Add(string name,string price,string creator)
+        public string Add(string name, string price, string creator)
         {
             try
             {
@@ -61,30 +61,48 @@ namespace TodoApi.Controllers
                 };
                 var result = _service.Add(manage);
                 return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = result, Message = "添加成功" });
-            }
+        }
             catch (Exception)
             {
                 return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = false, Message = "价格输入有误" });
             }
-
         }
         /// <summary>
-        /// 
+        /// 删除
+        /// </summary>
+        /// <param name="ID">BOOKID</param>
+        /// <returns></returns>
+        [HttpPost("Delete")]
+        public string Delete(Guid ID)
+        {
+            var a = _service.SelectEntity(ID);
+            if (a!=null)
+            {
+                a.Isdelete = true;
+                var res = _service.Update(a);
+                return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = res, Message = "删除成功" });
+            }
+            return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = false, Message = "该数据已经不存在，请刷新页面重试" });
+        }
+        /// <summary>
+        /// 查询单个实例
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public string SelectEntity(Guid ID)
+        {
+            return JsonConvert.SerializeObject(_service.SelectEntity(ID));
+        }
+        /// <summary>
+        /// 查询不分页列表
         /// </summary>
         /// <returns></returns>
-        [HttpGet("OutPut")]
-        public FileResult OutPut()
+        public string SelectList()
         {
-            byte[] a = new byte[1024 * 2];
-            using (MemoryStream ms = new MemoryStream())
-            {
-                a = ms.GetBuffer();
-                ms.Close();
-            };
-            return File(a, "text/plain", "测试.txt", true);
+            return JsonConvert.SerializeObject(_service.SelectList());
         }
         /// <summary>
-        /// 
+        /// EPPlus简单例子
         /// </summary>
         /// <returns></returns>
         [HttpGet("Export")]
@@ -103,7 +121,7 @@ namespace TodoApi.Controllers
             return File(stream, "application/ms-excel");
         }
         /// <summary>
-        /// 
+        /// NPOI简单例子
         /// </summary>
         /// <returns></returns>
         [HttpGet("Export2")]

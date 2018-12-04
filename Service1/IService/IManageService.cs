@@ -8,6 +8,8 @@ namespace Service
     public interface IManageService
     {
         bool Add(ManageItem manage);
+        bool Update(ManageItem manage);
+        ManageItem SelectEntity(Guid id);
         List<ManageItem> SelectList();
     }
 }

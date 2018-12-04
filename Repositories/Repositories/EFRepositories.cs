@@ -21,5 +21,11 @@ namespace Repositories
             var func = EF.CompileQuery((DbContext context) => context.Set<TManage>().Where(exp));
             return func(_context);
         }
+        public TManage MyCompileQuerySingle(Expression<Func<TManage, bool>> exp)
+        {
+            exp = exp ?? (s => 1 == 1);
+            var func = EF.CompileQuery((DbContext context) => context.Set<TManage>().FirstOrDefault(exp));
+            return func(_context);
+        }
     }
 }

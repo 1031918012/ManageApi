@@ -21,7 +21,10 @@ namespace Repositories
         void ISalaryUnitOfWork.Add<TManage>(TManage manage)
         {
             _context.Set<TManage>().AddAsync(manage);
-
+        }
+        void ISalaryUnitOfWork.Update<TManage>(TManage manage)
+        {
+            _context.Set<TManage>().Update(manage);
         }
     }
 }

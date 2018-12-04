@@ -30,43 +30,24 @@
             <param name="creator">创建人</param>
             <returns></returns>
         </member>
-        <member name="M:TodoApi.Controllers.ManageController.OutPut">
+        <member name="M:TodoApi.Controllers.ManageController.Delete(System.Guid)">
             <summary>
-            
+            删除
             </summary>
+            <param name="ID">BOOKID</param>
             <returns></returns>
         </member>
         <member name="M:TodoApi.Controllers.ManageController.Export">
             <summary>
-            
+            EPPlus简单例子
             </summary>
             <returns></returns>
         </member>
         <member name="M:TodoApi.Controllers.ManageController.Export2">
             <summary>
-            
+            NPOI简单例子
             </summary>
             <returns></returns>
-        </member>
-        <member name="T:TodoApi.Controllers.DTOManageItem">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:TodoApi.Controllers.DTOManageItem.ID">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:TodoApi.Controllers.DTOManageItem.Name">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:TodoApi.Controllers.DTOManageItem.Price">
-            <summary>
-            
-            </summary>
         </member>
         <member name="T:TodoApi.Program">
             <summary>

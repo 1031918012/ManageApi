@@ -13,6 +13,8 @@ using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Service;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace TodoApi
 {
@@ -41,6 +43,11 @@ namespace TodoApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
+            {
+                o.LoginPath = new PathString("/User/Login");
+                o.AccessDeniedPath = new PathString("/Error/Forbidden");
+            });
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
@@ -89,6 +96,7 @@ namespace TodoApi
             });
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseMvc();
         }
     }
