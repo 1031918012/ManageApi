@@ -50,9 +50,9 @@ namespace TodoApi
                     //允许所有来源，允许所有HTTP方法，允许所有作者的请求标头
                 });
             });
-            services.AddDbContext<ManageContext>(opt =>
+            services.AddDbContextPool<ManageContext>(opt =>
             {
-                opt.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"));
+                opt.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"),b=>b.MigrationsAssembly("Repositories"));
             });
             services.AddSwaggerGen(c =>
             {

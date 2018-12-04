@@ -21,12 +21,13 @@
             <param name="service"></param>
             <param name="hostingEnvironment"></param>
         </member>
-        <member name="M:TodoApi.Controllers.ManageController.Add(System.String,System.String)">
+        <member name="M:TodoApi.Controllers.ManageController.Add(System.String,System.String,System.String)">
             <summary>
             添加
             </summary>
             <param name="name">名字</param>
             <param name="price">价格</param>
+            <param name="creator">创建人</param>
             <returns></returns>
         </member>
         <member name="M:TodoApi.Controllers.ManageController.OutPut">
@@ -40,6 +41,32 @@
             
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:TodoApi.Controllers.ManageController.Export2">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TodoApi.Controllers.DTOManageItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TodoApi.Controllers.DTOManageItem.ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TodoApi.Controllers.DTOManageItem.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TodoApi.Controllers.DTOManageItem.Price">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:TodoApi.Program">
             <summary>

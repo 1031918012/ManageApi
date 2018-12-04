@@ -11,6 +11,7 @@ using OfficeOpenXml;
 using System.Collections.Generic;
 using Microsoft.Net.Http.Headers;
 using System.Web;
+using System.Linq;
 
 namespace TodoApi.Controllers
 {
@@ -25,7 +26,7 @@ namespace TodoApi.Controllers
         /// 
         /// </summary>
         public IManageService _service;
-        private IHostingEnvironment _hostingEnvironment;
+        private readonly IHostingEnvironment _hostingEnvironment;
         /// <summary>
         /// 
         /// </summary>
@@ -42,18 +43,30 @@ namespace TodoApi.Controllers
         /// </summary>
         /// <param name="name">名字</param>
         /// <param name="price">价格</param>
+        /// <param name="creator">创建人</param>
         /// <returns></returns>
         [HttpPost("Add")]
-        public string Add(string name,string price)
+        public string Add(string name,string price,string creator)
         {
-            ManageItem manage = new ManageItem
+            try
             {
-                ID = Guid.NewGuid(),
-                Name = name,
-                Price = price
-            };
-            var result = _service.Add(manage);
-            return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = result, Message = "添加成功" });
+                ManageItem manage = new ManageItem
+                {
+                    BookID = Guid.NewGuid(),
+                    Name = name,
+                    Price = decimal.Parse(price),
+                    CreateTime = DateTime.Now,
+                    Creator = creator,
+                    Isdelete = false,
+                };
+                var result = _service.Add(manage);
+                return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = result, Message = "添加成功" });
+            }
+            catch (Exception)
+            {
+                return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = false, Message = "价格输入有误" });
+            }
+
         }
         /// <summary>
         /// 
@@ -87,7 +100,7 @@ namespace TodoApi.Controllers
             var filename = HttpUtility.UrlEncode("测试能不能用中文.xlsx", Encoding.UTF8);
             var stream = ExcelHelper.ExportListToExcel(data, filename, headers);
             Response.Headers[HeaderNames.ContentDisposition] = new ContentDispositionHeaderValue("attachment") { FileName = filename }.ToString();
-            return new FileStreamResult(stream, "application/ms-excel");
+            return File(stream, "application/ms-excel");
         }
         /// <summary>
         /// 
@@ -97,9 +110,8 @@ namespace TodoApi.Controllers
         public FileResult Export2()
         {
             var data = _service.SelectList();
-            byte[] res = NPOIHelp.OutputExcel(data, list, task.TaskName + "错误数据表");
+            byte[] res = NPOIHelp.OutputExcel(data, "错误数据表");
             return File(res, "application/ms-excel", "错误数据表.xlsx", true);
         }
-
     }
 }

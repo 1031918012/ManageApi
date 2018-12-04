@@ -1,5 +1,4 @@
-﻿using Domain;
-using NPOI.HSSF.Util;
+﻿using NPOI.HSSF.Util;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System;
@@ -9,8 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Infrastructure;
-namespace API
+namespace Infrastructure
 {
     /// <summary>
     /// excle相关帮助方法
@@ -24,7 +22,7 @@ namespace API
         /// <param name="titles">表头集合</param>
         /// <param name="name">sheet名称</param>
         /// <returns></returns>
-        public static byte[] OutputExcel<T>(List<T> data, List<string> titles, string name)
+        public static byte[] OutputExcel<T>(List<T> data, string name, List<string> titles =null)
         {
 
             //1.创建相关对象
@@ -32,8 +30,6 @@ namespace API
             ISheet sheet = workbook.CreateSheet(name);
             IRow titleRow = null;
             IRow rows = null;
-            StringBuilder stringBuilder = new StringBuilder();
-
 
             //2.设置表头
             if (titles != null && titles.Count > 0)
@@ -50,17 +46,14 @@ namespace API
             //3.设置数据
             if (data != null && data.Count > 0)
             {
-                string[] strs = stringBuilder.ToString().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-                for (int i = 0; i < data.Count; i++)
+                foreach (var item in data)
                 {
-                    Type type = data[i].GetType();
-                    //1.创建行
-                    rows = sheet.CreateRow(i + 1);
-                    //3.根据序号获取值
-                    for (int j = 0; j < strs.Length; j++)
+                    rows = sheet.CreateRow(data.IndexOf(item) + 1);
+                    var j = 0;
+                    foreach (var p in item.GetType().GetProperties())
                     {
-                        var propertyInfo = type.GetProperty("Project" + strs[j]).GetValue(data[i]);
-                        rows.CreateCell(j).SetCellValue(propertyInfo == null ? "" : propertyInfo.ToString());
+                        rows.CreateCell(j).SetCellValue(p == null ? "" : p.GetValue(item).ToString());
+                        j++;
                     }
                 }
             }
@@ -127,118 +120,6 @@ namespace API
                 //设置当前列宽
                 sheet.SetColumnWidth(columnNum, columnWidth * 256);
             }
-        }
-
-        /// <summary>
-        /// 解析excel=>SalaryData
-        /// </summary>
-        /// <param name="stream"></param>
-        ///  <param name="projList"></param>
-        /// <returns></returns>
-        public static Tuple<bool, List<SalaryCalculateData>> ResolveTaskDataExcel(Stream stream, List<SOBSalaryProject> projList)
-        {
-            var nameList = projList.Where(a => String.IsNullOrWhiteSpace(a.Formula)).OrderBy(a => a.SortNumber).Select(a => a.Name).ToList();
-            XSSFWorkbook workBook = new XSSFWorkbook(stream);
-            ISheet sheet = workBook.GetSheetAt(0);
-            IRow row2 = sheet.GetRow(0);
-            var res2 = row2.Select(a => a.ToString().Trim()).ToList();
-            if (res2.Count != nameList.Count) return new Tuple<bool, List<SalaryCalculateData>>(false, null);
-            for (int i = 0; i < res2.Count; i++)
-            {
-                if (res2[i] != nameList[i]) new Tuple<bool, List<SalaryCalculateData>>(false, null);
-            }
-            bool isFirstRow = true;
-            int lastRowNum = sheet.LastRowNum;
-            int idCardIndex = -1;
-            List<SalaryCalculateData> res = new List<SalaryCalculateData>();
-            Dictionary<int, int> mapper = new Dictionary<int, int>();
-            for (int i = 0; i <= lastRowNum; i++)
-            {
-                SalaryCalculateData data = new SalaryCalculateData();
-                if (sheet.GetRow(i) == null) continue;
-                if (isFirstRow)
-                {
-                    var idCardCol = sheet.GetRow(i).Where(a => a.StringCellValue == "身份证").FirstOrDefault();
-                    if (idCardCol == null) return new Tuple<bool, List<SalaryCalculateData>>(false, null);
-                    idCardIndex = idCardCol.ColumnIndex;
-                    for (int q = 0; q < sheet.GetRow(i).LastCellNum; q++)
-                    {
-                        var name = sheet.GetRow(i).GetCell(q).ToString().Trim();
-                        var value = projList.Where(a => a.Name == name).FirstOrDefault().SortNumber;
-                        mapper.Add(q, value);
-                    }
-                    isFirstRow = false;
-                }
-                else
-                {
-                    IRow row = sheet.GetRow(i);
-                    if (row == null) continue;
-                    for (int j = 0; j < mapper.Count; j++)
-                    {
-                        if (j == idCardIndex)
-                        {
-                            string str = row.GetCell(j) != null ? row.GetCell(j).ToString() : "";
-                            str = str.Trim().ToLower();
-                            data.IDCard = str;
-                            data.IDCardSortNumber = mapper[j];
-                            SetValueToData(data, mapper[j], str);
-                        }
-                        else
-                        {
-                            var cell = row.GetCell(j);
-                            if (cell == null) continue;
-                            string str = cell != null ? cell.ToString() : "";
-                            SetValueToData(data, mapper[j], str);
-                        }
-                    }
-                    if (!string.IsNullOrEmpty(data.IDCard)) res.Add(data);
-                }
-            }
-            return new Tuple<bool, List<SalaryCalculateData>>(true, res); ;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="projList"></param>
-        /// <returns></returns>
-        public static bool CheckImportExcel(Stream stream, List<SOBSalaryProject> projList)
-        {
-            var nameList = projList.OrderBy(a => a.SortNumber).Select(a => a.Name).ToList();
-            XSSFWorkbook workBook = new XSSFWorkbook(stream);
-            ISheet sheet = workBook.GetSheetAt(0);
-            IRow row = sheet.GetRow(0);
-            var res = row.Select(a => a.ToString()).ToList();
-            if (res.Count != nameList.Count) return false;
-            for (int i = 0; i < res.Count; i++)
-            {
-                if (res[i] != nameList[i]) return false;
-            }
-            return true;
-        }
-
-
-        /// <summary>
-        /// 获取对应排序的值在SalaryCalulateData中
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="order"></param>
-        /// <returns></returns>
-        private static string GetValueFromData(SalaryCalculateData data, int order)
-        {
-            var propertyInfo = data.GetType().GetProperties().Where(a => a.Name == "Project" + order).FirstOrDefault();
-            return propertyInfo.GetValue(data).ToString();
-        }
-        /// <summary>
-        /// 根据排序 设置SalaryCalculateData中的值
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="order"></param>
-        /// <param name="value"></param>
-        private static void SetValueToData(SalaryCalculateData data, int order, object value)
-        {
-            var propertyInfo = data.GetType().GetProperties().Where(a => a.Name == "Project" + order).FirstOrDefault();
-            propertyInfo.SetValue(data, value.ToString());
         }
     }
 }

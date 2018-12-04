@@ -20,7 +20,7 @@ namespace Service
         }
         public List<ManageItem> SelectList()
         {
-            return _manage.MyCompileQuery(s => s.ID != null).ToList();
+            return _manage.MyCompileQuery(s => s.BookID != null).ToList();
         }
     }
 }
