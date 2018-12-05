@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Infrastructure
+namespace ManageApi
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ExcelHelper
     {
         /// <summary>

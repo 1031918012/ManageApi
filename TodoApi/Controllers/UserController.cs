@@ -1,23 +1,11 @@
 ﻿using System;
-using Domain;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Service;
-using Infrastructure;
-using System.Text;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using OfficeOpenXml;
 using System.Collections.Generic;
-using Microsoft.Net.Http.Headers;
-using System.Web;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-namespace TodoApi.Controllers
+namespace ManageApi.Controllers
 {
     /// <summary>
     /// 
@@ -26,6 +14,6 @@ namespace TodoApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        
+
     }
 }

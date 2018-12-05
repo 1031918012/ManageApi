@@ -37,6 +37,19 @@
             <param name="ID">BOOKID</param>
             <returns></returns>
         </member>
+        <member name="M:TodoApi.Controllers.ManageController.SelectEntity(System.Guid)">
+            <summary>
+            查询单个实例
+            </summary>
+            <param name="ID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TodoApi.Controllers.ManageController.SelectList">
+            <summary>
+            查询不分页列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:TodoApi.Controllers.ManageController.Export">
             <summary>
             EPPlus简单例子

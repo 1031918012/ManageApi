@@ -1,14 +1,19 @@
-﻿using NPOI.HSSF.Util;
+﻿using Microsoft.AspNetCore.Mvc;
+using NPOI.HSSF.UserModel;
+using NPOI.HSSF.Util;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-namespace Infrastructure
+using Domain;
+
+namespace ManageApi
 {
     /// <summary>
     /// excle相关帮助方法
@@ -121,5 +126,81 @@ namespace Infrastructure
                 sheet.SetColumnWidth(columnNum, columnWidth * 256);
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stream1"></param>
+        /// <returns></returns>
+        public static List<ManageItem> Import(Stream stream1)
+        {
+            return null;
+        }
+        ///// <summary>
+        ///// 解析excel=>SalaryData
+        ///// </summary>
+        ///// <param name="stream"></param>
+        /////  <param name="projList"></param>
+        ///// <returns></returns>
+        //public static Tuple<bool, List<SalaryCalculateData>> ResolveTaskDataExcel(Stream stream, List<SOBSalaryProject> projList)
+        //{
+        //    var nameList = projList.Where(a => String.IsNullOrWhiteSpace(a.Formula)).OrderBy(a => a.SortNumber).Select(a => a.Name).ToList();
+        //    XSSFWorkbook workBook = new XSSFWorkbook(stream);
+        //    ISheet sheet = workBook.GetSheetAt(0);
+        //    IRow row2 = sheet.GetRow(0);
+        //    var res2 = row2.Select(a => a.ToString().Trim()).ToList();
+        //    if (res2.Count != nameList.Count) return new Tuple<bool, List<SalaryCalculateData>>(false, null);
+        //    for (int i = 0; i < res2.Count; i++)
+        //    {
+        //        if (res2[i] != nameList[i]) new Tuple<bool, List<SalaryCalculateData>>(false, null);
+        //    }
+        //    bool isFirstRow = true;
+        //    int lastRowNum = sheet.LastRowNum;
+        //    int idCardIndex = -1;
+        //    List<SalaryCalculateData> res = new List<SalaryCalculateData>();
+        //    Dictionary<int, int> mapper = new Dictionary<int, int>();
+        //    for (int i = 0; i <= lastRowNum; i++)
+        //    {
+        //        SalaryCalculateData data = new SalaryCalculateData();
+        //        if (sheet.GetRow(i) == null) continue;
+        //        if (isFirstRow)
+        //        {
+        //            var idCardCol = sheet.GetRow(i).Where(a => a.StringCellValue == "身份证").FirstOrDefault();
+        //            if (idCardCol == null) return new Tuple<bool, List<SalaryCalculateData>>(false, null);
+        //            idCardIndex = idCardCol.ColumnIndex;
+        //            for (int q = 0; q < sheet.GetRow(i).LastCellNum; q++)
+        //            {
+        //                var name = sheet.GetRow(i).GetCell(q).ToString().Trim();
+        //                var value = projList.Where(a => a.Name == name).FirstOrDefault().SortNumber;
+        //                mapper.Add(q, value);
+        //            }
+        //            isFirstRow = false;
+        //        }
+        //        else
+        //        {
+        //            IRow row = sheet.GetRow(i);
+        //            if (row == null) continue;
+        //            for (int j = 0; j < mapper.Count; j++)
+        //            {
+        //                if (j == idCardIndex)
+        //                {
+        //                    string str = row.GetCell(j) != null ? row.GetCell(j).ToString() : "";
+        //                    str = str.Trim().ToLower();
+        //                    data.IDCard = str;
+        //                    data.IDCardSortNumber = mapper[j];
+        //                    SetValueToData(data, mapper[j], str);
+        //                }
+        //                else
+        //                {
+        //                    var cell = row.GetCell(j);
+        //                    if (cell == null) continue;
+        //                    string str = cell != null ? cell.ToString() : "";
+        //                    SetValueToData(data, mapper[j], str);
+        //                }
+        //            }
+        //            if (!string.IsNullOrEmpty(data.IDCard)) res.Add(data);
+        //        }
+        //    }
+        //    return new Tuple<bool, List<SalaryCalculateData>>(true, res); ;
+        //}
     }
 }

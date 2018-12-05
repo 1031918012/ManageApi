@@ -12,6 +12,12 @@ using System.Collections.Generic;
 using Microsoft.Net.Http.Headers;
 using System.Web;
 using System.Linq;
+using System.Data;
+using NPOI.SS.UserModel;
+using NPOI.HSSF.UserModel;
+using NPOI.XSSF.UserModel;
+using Microsoft.AspNetCore.Http;
+using ManageApi;
 
 namespace TodoApi.Controllers
 {
@@ -89,6 +95,7 @@ namespace TodoApi.Controllers
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
+        [HttpPost("SelectEntity")]
         public string SelectEntity(Guid ID)
         {
             return JsonConvert.SerializeObject(_service.SelectEntity(ID));
@@ -97,6 +104,7 @@ namespace TodoApi.Controllers
         /// 查询不分页列表
         /// </summary>
         /// <returns></returns>
+        [HttpPost("SelectList")]
         public string SelectList()
         {
             return JsonConvert.SerializeObject(_service.SelectList());
@@ -130,6 +138,25 @@ namespace TodoApi.Controllers
             var data = _service.SelectList();
             byte[] res = NPOIHelp.OutputExcel(data, "错误数据表");
             return File(res, "application/ms-excel", "错误数据表.xlsx", true);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("Import")]
+        public string Import(IFormFile file)
+        {
+            var stream = file.OpenReadStream();
+            try
+            {
+                var taskDataList = NPOIHelp.Import(stream);
+                return null;
+            }
+            catch (Exception)
+            {
+                return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = false, Message = "导入的数据格式有误!" });
+            }
+
         }
     }
 }
