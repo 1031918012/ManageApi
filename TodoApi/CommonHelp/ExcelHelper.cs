@@ -14,6 +14,7 @@ namespace ManageApi
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="data">需要导出的列表数据</param>
+        /// <param name="filename">文件名</param>
         /// <param name="headers">需要自定义的字段和表头值</param>
         /// <returns></returns>
         public static MemoryStream ExportListToExcel<T>(List<T> data, string filename, Dictionary<string, string> headers = null)
