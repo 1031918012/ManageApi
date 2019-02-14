@@ -65,11 +65,27 @@ namespace TodoApi
             });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("ManageApi", new Info { Title = "ManageApi", Version = "ManageApi" });
+                c.SwaggerDoc("v1", new Info { Title = "ManageApi", Version = "v1" });
                 c.SwaggerDoc("user", new Info { Title = "user", Version = "user" });
-                var xmlFile = $"{Assembly.GetEntryAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
+                c.DocInclusionPredicate((docName, apiDesc) =>
+                {
+                    if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo))
+                    {
+                        return false;
+                    }
+                    var version = methodInfo.DeclaringType.GetCustomAttributes(true).OfType<ApiExplorerSettingsAttribute>().Select(a => a.GroupName);
+                    if ((docName.ToLower() == "v1") && version.FirstOrDefault() == null)
+                    {
+                        return true;
+                    }
+                    return version.Any(v => v.ToString() == docName);
+                });
+                var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
+                var xmlControllPath = Path.Combine(basePath, "ManageApi.xml");
+                var xmlDomainPath = Path.Combine(basePath, "Domain.xml");
+                c.IncludeXmlComments(xmlControllPath);
+                c.IncludeXmlComments(xmlDomainPath);
+                c.OperationFilter<AddAuthTokenHeaderParameter>();
             });
             services.AddScoped<IManageService, ManageService>();
             services.AddScoped<IManageReposotory, ManageRepository>();
@@ -93,10 +109,10 @@ namespace TodoApi
                 app.UseHsts();
             }
             app.UseStaticFiles();
-            app.UseSwagger();
+            app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/ManageApi/swagger.json", "ManageApi");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ManageApi");
                 c.SwaggerEndpoint("/swagger/user/swagger.json", "user");
             });
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());

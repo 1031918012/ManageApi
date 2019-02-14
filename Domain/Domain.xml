@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Domain</name>
+    </assembly>
+    <members>
+        <member name="T:Domain.IEntity">
+            <summary>
+            泛型约束  ，表示接口继承自领域实体
+            </summary>
+        </member>
+        <member name="T:Domain.IManage">
+            <summary>
+            聚合根接口
+            </summary>
+        </member>
+        <member name="T:Domain.Manage">
+            <summary>
+            聚合根抽象类，定义公共行为和属性
+            </summary>
+        </member>
+    </members>
+</doc>
