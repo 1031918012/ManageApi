@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{6F1A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service1\Service.csproj", "{B4CA6CAD-1067-4197-9DE1-4501BD953415}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{875E2136-7C3C-4DA8-B5D8-672CF41BA2C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject", "XUnitTestProject\XUnitTestProject.csproj", "{C2CE5D70-036B-45F4-A1A1-BD9BDE394D27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,10 +49,10 @@ Global
 		{B4CA6CAD-1067-4197-9DE1-4501BD953415}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4CA6CAD-1067-4197-9DE1-4501BD953415}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4CA6CAD-1067-4197-9DE1-4501BD953415}.Release|Any CPU.Build.0 = Release|Any CPU
-		{875E2136-7C3C-4DA8-B5D8-672CF41BA2C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{875E2136-7C3C-4DA8-B5D8-672CF41BA2C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{875E2136-7C3C-4DA8-B5D8-672CF41BA2C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{875E2136-7C3C-4DA8-B5D8-672CF41BA2C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2CE5D70-036B-45F4-A1A1-BD9BDE394D27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2CE5D70-036B-45F4-A1A1-BD9BDE394D27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2CE5D70-036B-45F4-A1A1-BD9BDE394D27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2CE5D70-036B-45F4-A1A1-BD9BDE394D27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

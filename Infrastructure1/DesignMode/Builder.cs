@@ -85,7 +85,6 @@ namespace Infrastructure.Builder
         {
             return RomanHouse;
         }
-    }
     //public class Client
     //{
     //    public static void Main(string[] args)
