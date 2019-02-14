@@ -15,6 +15,8 @@ using Newtonsoft.Json.Serialization;
 using Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Linq;
 
 namespace TodoApi
 {
@@ -63,7 +65,8 @@ namespace TodoApi
             });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "ManageApi", Version = "v1" });
+                c.SwaggerDoc("ManageApi", new Info { Title = "ManageApi", Version = "ManageApi" });
+                c.SwaggerDoc("user", new Info { Title = "user", Version = "user" });
                 var xmlFile = $"{Assembly.GetEntryAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
@@ -93,7 +96,8 @@ namespace TodoApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ManageApi");
+                c.SwaggerEndpoint("/swagger/ManageApi/swagger.json", "ManageApi");
+                c.SwaggerEndpoint("/swagger/user/swagger.json", "user");
             });
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseHttpsRedirection();
