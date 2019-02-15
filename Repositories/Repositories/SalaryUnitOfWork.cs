@@ -18,9 +18,9 @@ namespace Repositories
             return _context.SaveChanges() > 0;
         }
 
-        void ISalaryUnitOfWork.Add<TManage>(TManage manage)
+        async void ISalaryUnitOfWork.Add<TManage>(TManage manage)
         {
-            _context.Set<TManage>().AddAsync(manage);
+           await _context.Set<TManage>().AddAsync(manage);
         }
         void ISalaryUnitOfWork.Update<TManage>(TManage manage)
         {

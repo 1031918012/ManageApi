@@ -67,7 +67,7 @@ namespace ManageApi.Controllers
                 var result = _service.Add(manage);
                 return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = result, Message = "添加成功" });
         }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = false, Message = "价格输入有误" });
             }

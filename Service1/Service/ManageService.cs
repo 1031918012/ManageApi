@@ -8,8 +8,8 @@ namespace Service
 {
     public class ManageService: BaseService, IManageService
     {
-        private readonly IManageReposotory _manage;
-        public ManageService(ISalaryUnitOfWork salaryUnitOfWork, IManageReposotory manage) : base(salaryUnitOfWork)
+        private readonly IManageRepository _manage;
+        public ManageService(ISalaryUnitOfWork salaryUnitOfWork, IManageRepository manage) : base(salaryUnitOfWork)
         {
             _manage = manage;
         }

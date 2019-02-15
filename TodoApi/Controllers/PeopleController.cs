@@ -13,28 +13,28 @@ namespace ManageApi.Controllers
     /// </summary>
     [Route("api/[controller]"), ApiExplorerSettings(GroupName = "user")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class PeopleController : ControllerBase
     {
         /// <summary>
         /// 
         /// </summary>
-        public IManageService _service;
+        public IPeopleService _people;
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="service"></param>
-        public UserController(IManageService service)
+        /// <param name="people"></param>
+        public PeopleController(IPeopleService people)
         {
-            _service = service;
+            _people = people;
         }
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        [HttpPut("geta")]
-        public string Geta(string a)
+        [HttpPost("AddOnePeople")]
+        public OkResult AddOnePeople(string name)
         {
-            return a;
-        }
+            return Ok();
+        } 
     }
 }

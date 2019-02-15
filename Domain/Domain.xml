@@ -19,5 +19,124 @@
             聚合根抽象类，定义公共行为和属性
             </summary>
         </member>
+        <member name="T:Domain.IManageRepository">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Domain.IPeopleRepository">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Domain.IRepositories`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TManage"></typeparam>
+        </member>
+        <member name="M:Domain.IRepositories`1.MyCompileQuery(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            
+            </summary>
+            <param name="exp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Domain.IRepositories`1.MyCompileQuerySingle(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            
+            </summary>
+            <param name="exp"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Domain.ISalaryUnitOfWork">
+            <summary>
+            工作单元
+            </summary>
+        </member>
+        <member name="M:Domain.ISalaryUnitOfWork.Add``1(``0)">
+            <summary>
+            添加
+            </summary>
+            <typeparam name="TManage"></typeparam>
+            <param name="manage"></param>
+        </member>
+        <member name="M:Domain.ISalaryUnitOfWork.Update``1(``0)">
+            <summary>
+            更新
+            </summary>
+            <typeparam name="TManage"></typeparam>
+            <param name="manage"></param>
+        </member>
+        <member name="T:Domain.ManageItem">
+            <summary>
+            书籍管理
+            </summary>
+        </member>
+        <member name="P:Domain.ManageItem.BookID">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:Domain.ManageItem.Name">
+            <summary>
+            书籍名字
+            </summary>
+        </member>
+        <member name="P:Domain.ManageItem.Price">
+            <summary>
+            价格
+            </summary>
+        </member>
+        <member name="P:Domain.ManageItem.Isdelete">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="P:Domain.ManageItem.Creator">
+            <summary>
+            创建者
+            </summary>
+        </member>
+        <member name="P:Domain.ManageItem.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Domain.ManageItem.ModifyTime">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="T:Domain.People">
+            <summary>
+            人员管理模型
+            </summary>
+        </member>
+        <member name="P:Domain.People.PeopleID">
+            <summary>
+            主键，人员id
+            </summary>
+        </member>
+        <member name="P:Domain.People.Creator">
+            <summary>
+            创建者
+            </summary>
+        </member>
+        <member name="P:Domain.People.IDCard">
+            <summary>
+            身份证
+            </summary>
+        </member>
+        <member name="P:Domain.People.Name">
+            <summary>
+            身份证
+            </summary>
+        </member>
+        <member name="P:Domain.People.BankCard">
+            <summary>
+            银行卡号
+            </summary>
+        </member>
     </members>
 </doc>

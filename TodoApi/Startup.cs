@@ -82,13 +82,13 @@ namespace TodoApi
                 });
                 var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
                 var xmlControllPath = Path.Combine(basePath, "ManageApi.xml");
-                var xmlDomainPath = Path.Combine(basePath, "Domain.xml");
+                //var xmlDomainPath = Path.Combine(basePath, "Domain.xml");
                 c.IncludeXmlComments(xmlControllPath);
-                c.IncludeXmlComments(xmlDomainPath);
+                //c.IncludeXmlComments(xmlDomainPath);
                 c.OperationFilter<AddAuthTokenHeaderParameter>();
             });
             services.AddScoped<IManageService, ManageService>();
-            services.AddScoped<IManageReposotory, ManageRepository>();
+            services.AddScoped<IManageRepository, ManageRepository>();
             services.AddScoped<ISalaryUnitOfWork, SalaryUnitOfWork>();
             services.AddScoped<IRepositories<IManage>, EFRepositories<IManage>>();
         }
@@ -109,7 +109,7 @@ namespace TodoApi
                 app.UseHsts();
             }
             app.UseStaticFiles();
-            app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
+            app.UseSwagger(/*c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; }*/);
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ManageApi");

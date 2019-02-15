@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Repositories
 { 
-    public class ManageRepository:EFRepositories<ManageItem>, IManageReposotory
+    public class ManageRepository:EFRepositories<ManageItem>, IManageRepository
     {
         public ManageRepository(ManageContext context) : base(context) { }
     }
