@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using Domain;
+using Infrastructure;
 
 namespace Repositories
 {
@@ -13,18 +15,28 @@ namespace Repositories
         {
             _context = context;
         }
+
+        public Guid Id => new Guid();
         public bool Commit()
         {
             return _context.SaveChanges() > 0;
         }
 
-        async void ISalaryUnitOfWork.Add<TManage>(TManage manage)
+        void ISalaryUnitOfWork.Add<TManage>(TManage manage)
         {
-           await _context.Set<TManage>().AddAsync(manage);
+            _context.Set<TManage>().AddAsync(manage);
         }
+
+        void ISalaryUnitOfWork.Delete<TManage>(TManage manage)
+        {
+            _context.Set<TManage>().Remove(manage);
+        }
+
+
         void ISalaryUnitOfWork.Update<TManage>(TManage manage)
         {
             _context.Set<TManage>().Update(manage);
         }
+
     }
 }

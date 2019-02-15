@@ -15,15 +15,44 @@ namespace Repositories
         {
             _context = context;
         }
-        public IEnumerable<TManage> MyCompileQuery(Expression<Func<TManage, bool>> exp)
+
+        public IEnumerable<TManage> GetEntitieList(Expression<Func<TManage, bool>> exp)
         {
-            exp = exp ?? (s => 1 == 1);
+            return CompileQuery(exp);
+        }
+
+        public IEnumerable<TManage> GetEntitiesForPaging(int pageIndex, int pageSize, Expression<Func<TManage, bool>> exp)
+        {
+            var list = CompileQuery(exp).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            int totalNumber = list.Count();
+            return new PageResult<TManage>(totalNumber, (totalNumber + pageSize - 1) / pageSize, pageIndex, pageSize, list);
+
+        }
+
+        public TManage GetEntity(Expression<Func<TManage, bool>> exp)
+        {
+            return CompileQuerySingle(exp);
+        }
+        /// <summary>
+        /// 查列表 //有排序
+        /// </summary>
+        /// <param name="exp"></param>
+        /// <returns></returns>
+        private IEnumerable<TManage> CompileQuery(Expression<Func<TManage, bool>> exp)
+        {
+            //排序处理
+
+            //查内容
             var func = EF.CompileQuery((DbContext context) => context.Set<TManage>().Where(exp));
             return func(_context);
         }
-        public TManage MyCompileQuerySingle(Expression<Func<TManage, bool>> exp)
+        /// <summary>
+        /// 查实体 //无排序
+        /// </summary>
+        /// <param name="exp"></param>
+        /// <returns></returns>
+        private TManage CompileQuerySingle(Expression<Func<TManage, bool>> exp)
         {
-            exp = exp ?? (s => 1 == 1);
             var func = EF.CompileQuery((DbContext context) => context.Set<TManage>().FirstOrDefault(exp));
             return func(_context);
         }

@@ -17,6 +17,7 @@ using NPOI.SS.UserModel;
 using NPOI.HSSF.UserModel;
 using NPOI.XSSF.UserModel;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace ManageApi.Controllers
 {
@@ -32,15 +33,18 @@ namespace ManageApi.Controllers
         /// </summary>
         public IManageService _service;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly ILogger _logger;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="service"></param>
         /// <param name="hostingEnvironment"></param>
-        public ManageController(IManageService service, IHostingEnvironment hostingEnvironment)
+        /// <param name="logger"></param>
+        public ManageController(IManageService service, IHostingEnvironment hostingEnvironment, ILogger<ManageController> logger)
         {
             _service = service;
             _hostingEnvironment = hostingEnvironment;
+            _logger = logger;
         }
 
         /// <summary>
@@ -55,20 +59,26 @@ namespace ManageApi.Controllers
         {
             try
             {
+                var start = DateTime.UtcNow;
                 ManageItem manage = new ManageItem
                 {
-                    BookID = Guid.NewGuid(),
                     Name = name,
                     Price = decimal.Parse(price),
-                    CreateTime = DateTime.Now,
                     Creator = creator,
-                    Isdelete = false,
+                    Isdelete = false
                 };
+
+                manage.BookID = Guid.NewGuid();
+                manage.CreateTime = DateTime.Now;
                 var result = _service.Add(manage);
-                return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = result, Message = "添加成功" });
-        }
+
+                var end = DateTime.UtcNow;
+                var a = end - start;
+                return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = true, Message = "添加成功" + a.ToString() });
+            }
             catch (Exception ex)
             {
+                _logger.LogError("添加manage出错了{0}", name);
                 return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = false, Message = "价格输入有误" });
             }
         }
@@ -81,7 +91,7 @@ namespace ManageApi.Controllers
         public string Delete(Guid ID)
         {
             var a = _service.SelectEntity(ID);
-            if (a!=null)
+            if (a != null)
             {
                 a.Isdelete = true;
                 var res = _service.Update(a);

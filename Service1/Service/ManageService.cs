@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Service
 {
-    public class ManageService: BaseService, IManageService
+    public class ManageService : BaseService, IManageService
     {
         private readonly IManageRepository _manage;
         public ManageService(ISalaryUnitOfWork salaryUnitOfWork, IManageRepository manage) : base(salaryUnitOfWork)
@@ -17,7 +17,7 @@ namespace Service
         public bool Add(ManageItem manage)
         {
             _salaryUnitOfWork.Add(manage);
-           return _salaryUnitOfWork.Commit();
+            return _salaryUnitOfWork.Commit();
         }
 
         public bool Update(ManageItem manage)
@@ -27,7 +27,7 @@ namespace Service
         }
         public ManageItem SelectEntity(Guid id)
         {
-           return _manage.MyCompileQuerySingle(s => s.BookID == id);
+            return _manage.MyCompileQuerySingle(s => s.BookID == id);
         }
         public List<ManageItem> SelectList()
         {
