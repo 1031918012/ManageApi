@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,17 +17,16 @@ namespace Repositories
             _context = context;
         }
 
-        public IEnumerable<TManage> GetEntitieList(Expression<Func<TManage, bool>> exp)
+        public List<TManage> GetEntitieList(Expression<Func<TManage, bool>> exp)
         {
-            return CompileQuery(exp);
+            return CompileQuery(exp).ToList();
         }
 
-        public IEnumerable<TManage> GetEntitiesForPaging(int pageIndex, int pageSize, Expression<Func<TManage, bool>> exp)
+        public PageResult<TManage> GetEntitiesForPaging(int pageIndex, int pageSize, Expression<Func<TManage, bool>> exp)
         {
-            var list = CompileQuery(exp).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            var list = CompileQuery(exp).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             int totalNumber = list.Count();
-            return new PageResult<TManage>(totalNumber, (totalNumber + pageSize - 1) / pageSize, pageIndex, pageSize, list);
-
+            return new PageResult<TManage>(pageIndex, pageSize,totalNumber, (totalNumber + pageSize - 1) / pageSize,list);
         }
 
         public TManage GetEntity(Expression<Func<TManage, bool>> exp)
