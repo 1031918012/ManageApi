@@ -35,14 +35,23 @@
             </summary>
             <typeparam name="TManage"></typeparam>
         </member>
-        <member name="M:Domain.IRepositories`1.MyCompileQuery(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+        <member name="M:Domain.IRepositories`1.GetEntitieList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
             <summary>
             
             </summary>
             <param name="exp"></param>
             <returns></returns>
         </member>
-        <member name="M:Domain.IRepositories`1.MyCompileQuerySingle(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+        <member name="M:Domain.IRepositories`1.GetEntitiesForPaging(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            
+            </summary>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <param name="exp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Domain.IRepositories`1.GetEntity(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
             <summary>
             
             </summary>
@@ -64,6 +73,13 @@
         <member name="M:Domain.ISalaryUnitOfWork.Update``1(``0)">
             <summary>
             更新
+            </summary>
+            <typeparam name="TManage"></typeparam>
+            <param name="manage"></param>
+        </member>
+        <member name="M:Domain.ISalaryUnitOfWork.Delete``1(``0)">
+            <summary>
+            删除
             </summary>
             <typeparam name="TManage"></typeparam>
             <param name="manage"></param>

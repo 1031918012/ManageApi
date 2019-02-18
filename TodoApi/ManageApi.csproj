@@ -9,20 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\swagger\ui\dist\swagger-ui-bundle.js" />
-    <Content Remove="wwwroot\swagger\ui\dist\swagger-ui-bundle.js.map" />
-    <Content Remove="wwwroot\swagger\ui\dist\swagger-ui-standalone-preset.js" />
-    <Content Remove="wwwroot\swagger\ui\dist\swagger-ui-standalone-preset.js.map" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="ManageApi.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\swagger\ui\dist\swagger-ui.css.map" />
-    <None Include="wwwroot\swagger\ui\dist\swagger-ui.js" />
-    <None Include="wwwroot\swagger\ui\dist\swagger-ui.js.map" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +26,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Repositories\Repositories.csproj" />
     <ProjectReference Include="..\Service1\Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

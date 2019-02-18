@@ -1,6 +1,9 @@
-﻿using Swashbuckle.AspNetCore.Swagger;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TodoApi
 {
@@ -20,14 +23,26 @@ namespace TodoApi
             {
                 operation.Parameters = new List<IParameter>();
             }
-            operation.Parameters.Add(new NonBodyParameter()
+            var attrs = context.ApiDescription.ActionDescriptor.AttributeRouteInfo;
+
+            //先判断是否是匿名访问,
+            var descriptor = context.ApiDescription.ActionDescriptor as ControllerActionDescriptor;
+            if (descriptor != null)
             {
-                Name = "Path",
-                In = "header",
-                Type = "string",
-                Description = "请求客户端来源",
-                Required = false
-            });
+                var actionAttributes = descriptor.MethodInfo.GetCustomAttributes(inherit: true);
+                bool isAnonymous = actionAttributes.Any(a => a is AllowAnonymousAttribute);
+                //非匿名的方法,链接中添加accesstoken值
+                if (!isAnonymous)
+                {
+                    operation.Parameters.Add(new NonBodyParameter()
+                    {
+                        Name = "token",
+                        In = "query",//query header body path formData
+                        Type = "string",
+                        Required = true //是否必选
+                    });
+                }
+            }
         }
     }
 }

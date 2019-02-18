@@ -27,11 +27,11 @@ namespace Service
         }
         public ManageItem SelectEntity(Guid id)
         {
-            return _manage.MyCompileQuerySingle(s => s.BookID == id);
+            return _manage.GetEntity(s => s.BookID == id);
         }
         public List<ManageItem> SelectList()
         {
-            return _manage.MyCompileQuery(s => s.BookID != null).ToList();
+            return _manage.GetEntitieList(s => s.BookID != null).ToList();
         }
     }
 }
