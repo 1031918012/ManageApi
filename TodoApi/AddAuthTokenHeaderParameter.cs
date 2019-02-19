@@ -39,7 +39,6 @@ namespace TodoApi
                         Name = "token",
                         In = "query",//query header body path formData
                         Type = "string",
-                        Description = "请求客户端来源",
                         Required = true //是否必选
                     });
                 }

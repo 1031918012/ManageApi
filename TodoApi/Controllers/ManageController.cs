@@ -24,7 +24,7 @@ namespace ManageApi.Controllers
     /// <summary>
     /// 
     /// </summary>
-    [Route("api/[controller]"),ApiExplorerSettings(GroupName = "manage")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ManageController : ControllerBase
     {
@@ -67,6 +67,7 @@ namespace ManageApi.Controllers
                     Creator = creator,
                     Isdelete = false
                 };
+
                 manage.BookID = Guid.NewGuid();
                 manage.CreateTime = DateTime.Now;
                 var result = _service.Add(manage);
@@ -146,6 +147,26 @@ namespace ManageApi.Controllers
             var data = _service.SelectList();
             byte[] res = NPOIHelp.OutputExcel(data, "错误数据表");
             return File(res, "application/ms-excel", "错误数据表.xlsx", true);
+        }
+        /// <summary>
+        /// 给予凯哥智障打击
+        /// </summary>
+        /// <param name="value">凯哥初始智商值</param>
+        /// <returns></returns>
+        [HttpGet("zhishangdaji")]
+        public string Kaigezhishang(int value)
+        {
+            if (value > 0) return "初始智商值过大，与实际值不符，请重试！！！";
+            int value2 = 0;
+            Random rd = new Random();
+            value2 = rd.Next(1, 9999);
+            string ss = "您为凯哥赋予的初始智商值为:" + value;
+            if (value2 > 6666)
+                ss += "产生暴击，给予智商打击:" + value2;
+            else
+                ss += "给予智商打击:" + value2;
+            ss += "剩余智商为:" + (value - value2);
+            return ss;
         }
         /// <summary>
         /// 

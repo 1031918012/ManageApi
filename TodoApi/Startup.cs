@@ -76,9 +76,26 @@ namespace TodoApi
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("manage", new Info { Title = "薪酬", Version = "manage" });
-                c.SwaggerDoc("people", new Info { Title = "人员", Version = "people" });
-                c.SwaggerDoc("user", new Info { Title = "用户", Version = "user" });
+                List<string> file = Directory.GetFiles("..\\TodoApi\\Controllers", "*.cs", SearchOption.AllDirectories).ToList();
+                file.ForEach(s=> 
+                {
+                    var str = s.Substring(s.LastIndexOf("Controllers\\", s.IndexOf("Controller.cs"))).Replace("Controllers\\","").Replace("Controller.cs","").ToLower();
+                    c.SwaggerDoc(str, new Info { Title = str, Version = str });
+                });
+                c.DocInclusionPredicate((docName, apiDesc) =>
+                {
+                    if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo))
+                    {
+                        return false;
+                    }
+                    var res = methodInfo.DeclaringType.GetCustomAttributes(true);
+                    var version = methodInfo.DeclaringType.GetCustomAttributes(true).OfType<ApiExplorerSettingsAttribute>().Select(a => a.GroupName);
+                    if ((docName.ToLower() == "manage") && version.FirstOrDefault() == null)
+                    {
+                        return true;
+                    }
+                    return version.Any(v => v.ToString() == docName);
+                });
                 var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
                 var xmlControllPath = Path.Combine(basePath, "ManageApi.xml");
                 //var xmlDomainPath = Path.Combine(basePath, "Domain.xml");
@@ -105,13 +122,15 @@ namespace TodoApi
                 app.UseHsts();
             }
             app.UseStaticFiles();
-            app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
+            app.UseSwagger(/*c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; }*/);
             app.UseSwaggerUI(c =>
             {
-                c.ShowExtensions();
-                c.SwaggerEndpoint("/swagger/manage/swagger.json", "薪酬");
-                c.SwaggerEndpoint("/swagger/user/swagger.json", "用户");
-                c.SwaggerEndpoint("/swagger/people/swagger.json", "人员");
+                List<string> file = Directory.GetFiles("..\\TodoApi\\Controllers", "*.cs", SearchOption.AllDirectories).ToList();
+                file.ForEach(s =>
+                {
+                    var str = s.Substring(s.LastIndexOf("Controllers\\", s.IndexOf("Controller.cs"))).Replace("Controllers\\", "").Replace("Controller.cs", "").ToLower();
+                    c.SwaggerEndpoint("/swagger/"+str+"/swagger.json", str);
+                });
 
             });
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
