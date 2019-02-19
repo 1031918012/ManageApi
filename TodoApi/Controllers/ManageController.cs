@@ -24,7 +24,7 @@ namespace ManageApi.Controllers
     /// <summary>
     /// 
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]"),ApiExplorerSettings(GroupName = "manage")]
     [ApiController]
     public class ManageController : ControllerBase
     {
@@ -67,7 +67,6 @@ namespace ManageApi.Controllers
                     Creator = creator,
                     Isdelete = false
                 };
-
                 manage.BookID = Guid.NewGuid();
                 manage.CreateTime = DateTime.Now;
                 var result = _service.Add(manage);
