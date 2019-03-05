@@ -24,7 +24,6 @@ namespace ManageApi.Controllers
     /// <summary>
     /// 
     /// </summary>
-    [ApiVersion("1.0")]
     [Route("api/[controller]")]
     [ApiController]
     public class ManageController : ControllerBase

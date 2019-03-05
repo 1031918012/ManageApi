@@ -11,7 +11,6 @@ namespace ManageApi.Controllers
     /// <summary>
     /// 
     /// </summary>
-    [ApiVersion("1.0")]
     [Route("api/[controller]"), ApiExplorerSettings(GroupName = "user")]
     [ApiController]
     public class UserController : ControllerBase

@@ -44,17 +44,17 @@ namespace TodoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
             //{
             //    o.LoginPath = new PathString("/User/Login");
             //    o.AccessDeniedPath = new PathString("/Error/Forbidden");
             //});
-            services.AddApiVersioning(options => {
-                options.ReportApiVersions = true;
-                options.AssumeDefaultVersionWhenUnspecified = true;
-                options.DefaultApiVersion = new ApiVersion(2, 0);
-                });
+            //services.AddApiVersioning(options => {
+            //    options.ReportApiVersions = true;
+            //    options.AssumeDefaultVersionWhenUnspecified = true;
+            //    options.DefaultApiVersion = new ApiVersion(2, 0);
+            //    //});
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
