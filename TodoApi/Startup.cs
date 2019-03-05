@@ -45,11 +45,11 @@ namespace TodoApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
-            {
-                o.LoginPath = new PathString("/User/Login");
-                o.AccessDeniedPath = new PathString("/Error/Forbidden");
-            });
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
+            //{
+            //    o.LoginPath = new PathString("/User/Login");
+            //    o.AccessDeniedPath = new PathString("/Error/Forbidden");
+            //});
             services.AddApiVersioning(options => {
                 options.ReportApiVersions = true;
                 options.AssumeDefaultVersionWhenUnspecified = true;
@@ -113,7 +113,7 @@ namespace TodoApi
             {
                 app.UseHsts();
             }
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
             app.UseSwagger(/*c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; }*/);
             app.UseSwaggerUI(c =>
             {
