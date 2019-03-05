@@ -11,7 +11,7 @@ namespace Repositories.Migrations
 {
     [DbContext(typeof(ManageContext))]
     [Migration("20190219074403_init123")]
-    partial class init123
+    partial class Init123
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

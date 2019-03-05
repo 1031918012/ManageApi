@@ -26,7 +26,7 @@ namespace TodoApi
             var attrs = context.ApiDescription.ActionDescriptor.AttributeRouteInfo;
 
             //先判断是否是匿名访问,
-            var descriptor = context.ApiDescription.ActionDescriptor as ControllerActionDescriptor;
+            ControllerActionDescriptor descriptor = context.ApiDescription.ActionDescriptor as ControllerActionDescriptor;
             if (descriptor != null)
             {
                 var actionAttributes = descriptor.MethodInfo.GetCustomAttributes(inherit: true);

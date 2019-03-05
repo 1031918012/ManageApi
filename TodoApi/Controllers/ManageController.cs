@@ -24,6 +24,7 @@ namespace ManageApi.Controllers
     /// <summary>
     /// 
     /// </summary>
+    [ApiVersion("1.0")]
     [Route("api/[controller]")]
     [ApiController]
     public class ManageController : ControllerBase
@@ -76,7 +77,7 @@ namespace ManageApi.Controllers
                 var a = end - start;
                 return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = true, Message = "添加成功" + a.ToString() });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _logger.LogError("添加manage出错了{0}", name);
                 return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = false, Message = "价格输入有误" });

@@ -17,10 +17,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using ManageApi.Controllers;
-using System.Text;
-using System.Collections.Generic;
 
 namespace TodoApi
 {
@@ -48,12 +44,17 @@ namespace TodoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
             {
                 o.LoginPath = new PathString("/User/Login");
                 o.AccessDeniedPath = new PathString("/Error/Forbidden");
             });
+            services.AddApiVersioning(options => {
+                options.ReportApiVersions = true;
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                });
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
@@ -65,32 +66,20 @@ namespace TodoApi
             });
             services.AddDbContextPool<ManageContext>(opt =>
             {
-                opt.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"),b=>b.MigrationsAssembly("Repositories"));
+                opt.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"), b => b.MigrationsAssembly("Repositories"));
             });
-            services.AddScoped<IPeopleService, PeopleService>();
-            services.AddScoped<IPeopleRepository, PeopleRepository>();
-            services.AddScoped<IManageService, ManageService>();
-            services.AddScoped<IManageRepository, ManageRepository>();
-            services.AddScoped<ISalaryUnitOfWork, SalaryUnitOfWork>();
-            services.AddScoped<IRepositories<IManage>, EFRepositories<IManage>>();
-
             services.AddSwaggerGen(c =>
             {
-                List<string> file = Directory.GetFiles("..\\TodoApi\\Controllers", "*.cs", SearchOption.AllDirectories).ToList();
-                file.ForEach(s=> 
-                {
-                    var str = s.Substring(s.LastIndexOf("Controllers\\", s.IndexOf("Controller.cs"))).Replace("Controllers\\","").Replace("Controller.cs","").ToLower();
-                    c.SwaggerDoc(str, new Info { Title = str, Version = str });
-                });
+                c.SwaggerDoc("v1", new Info { Title = "ManageApi", Version = "v1" });
+                c.SwaggerDoc("user", new Info { Title = "user", Version = "user" });
                 c.DocInclusionPredicate((docName, apiDesc) =>
                 {
                     if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo))
                     {
                         return false;
                     }
-                    var res = methodInfo.DeclaringType.GetCustomAttributes(true);
                     var version = methodInfo.DeclaringType.GetCustomAttributes(true).OfType<ApiExplorerSettingsAttribute>().Select(a => a.GroupName);
-                    if ((docName.ToLower() == "manage") && version.FirstOrDefault() == null)
+                    if ((docName.ToLower() == "v1") && version.FirstOrDefault() == null)
                     {
                         return true;
                     }
@@ -103,7 +92,10 @@ namespace TodoApi
                 //c.IncludeXmlComments(xmlDomainPath);
                 c.OperationFilter<AddAuthTokenHeaderParameter>();
             });
-            
+            services.AddScoped<IManageService, ManageService>();
+            services.AddScoped<IManageRepository, ManageRepository>();
+            services.AddScoped<ISalaryUnitOfWork, SalaryUnitOfWork>();
+            services.AddScoped<IRepositories<IManage>, EFRepositories<IManage>>();
         }
         /// <summary>
         /// 
@@ -125,13 +117,8 @@ namespace TodoApi
             app.UseSwagger(/*c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; }*/);
             app.UseSwaggerUI(c =>
             {
-                List<string> file = Directory.GetFiles("..\\TodoApi\\Controllers", "*.cs", SearchOption.AllDirectories).ToList();
-                file.ForEach(s =>
-                {
-                    var str = s.Substring(s.LastIndexOf("Controllers\\", s.IndexOf("Controller.cs"))).Replace("Controllers\\", "").Replace("Controller.cs", "").ToLower();
-                    c.SwaggerEndpoint("/swagger/"+str+"/swagger.json", str);
-                });
-
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ManageApi");
+                c.SwaggerEndpoint("/swagger/user/swagger.json", "user");
             });
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseHttpsRedirection();
