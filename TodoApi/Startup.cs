@@ -68,6 +68,7 @@ namespace TodoApi
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"), b => b.MigrationsAssembly("Repositories"));
             });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "ManageApi", Version = "v1" });
