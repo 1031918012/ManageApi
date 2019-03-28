@@ -13,5 +13,12 @@ namespace Service
         {
             _userRepository = userRepository;
         }
+
+        public bool AddUser(User a)
+        {
+
+            _salaryUnitOfWork.Add(a);
+            return _salaryUnitOfWork.Commit();
+        }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Domain;
-using Microsoft.AspNetCore.Http;
+using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Service;
@@ -20,14 +17,14 @@ namespace ManageApi.Controllers
         /// <summary>
         /// 
         /// </summary>
-        public IManageService _service;
+        public readonly IUserService _userService;
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="service"></param>
-        public UserController(IManageService service)
+        /// <param name="userservice"></param>
+        public UserController(IUserService userservice)
         {
-            _service = service;
+            _userService = userservice;
         }
         /// <summary>
         /// 注册用户
@@ -38,10 +35,27 @@ namespace ManageApi.Controllers
         /// <param name="UNickname">昵称</param>
         /// <param name="phone">电话</param>
         /// <param name="Sub">角色</param>
+        /// <param name="imageCheck">角色</param>
         /// <returns></returns>
-        public string AddUser(string Uname,string password, string phone, string Icon, string UNickname, string Sub)
+        public string AddUser(string Uname, string password, string phone, string Icon, string UNickname, string Sub,string imageCheck)
         {
-            return JsonConvert.SerializeObject(new User());
+            //图像验证码
+            var a = new User
+            {
+                ID = new Guid(),
+                Password = password,//加密
+                Phone = phone,
+                Sub = Sub,
+                Uname = Uname,
+                UNickname = UNickname
+            };
+            var result = _userService.AddUser(a);
+            if (!result)
+            {
+                return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = false, Message = "添加用户失败" });
+            }
+            return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = true,Message = "添加用户成功" });
+
         }
     }
 }
