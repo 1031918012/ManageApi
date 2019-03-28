@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Domain;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -49,7 +50,7 @@ namespace ManageApi
                 User tm = (User)RayPIMemoryCache.Get(tokenStr);
                 //提取tokenModel中的Sub属性进行authorize认证
                 List<Claim> lc = new List<Claim>();
-                Claim c = new Claim(tm.Sub + "Type", tm.Sub);
+                Claim c = new Claim(tm.Sub, tm.Sub);
                 lc.Add(c);
                 ClaimsIdentity identity = new ClaimsIdentity(lc);
                 ClaimsPrincipal principal = new ClaimsPrincipal(identity);

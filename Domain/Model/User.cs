@@ -1,38 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace ManageApi
-{
+namespace Domain
+{ 
     /// <summary>
-    /// 令牌类
+    /// 
     /// </summary>
-    public class User
+    public class User: IManage
     {
+
         /// <summary>
-        /// 
+        /// ID
         /// </summary>
-        public User()
-        {
-            this.Uid = 0;
-        }
-        /// <summary>
-        /// 用户Id
-        /// </summary>
-        public long Uid { get; set; }
+        public Guid ID { get; set; }
         /// <summary>
         /// 用户名
         /// </summary>
         public string Uname { get; set; }
         /// <summary>
+        /// 密码
+        /// </summary>
+        public string Password { get; set; }
+        /// <summary>
         /// 手机
         /// </summary>
         public string Phone { get; set; }
-        /// <summary>
-        /// 头像
-        /// </summary>
-        public string Icon { get; set; }
         /// <summary>
         /// 昵称
         /// </summary>

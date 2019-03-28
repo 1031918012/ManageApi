@@ -85,9 +85,9 @@ namespace TodoApi
             services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("System", policy => policy.RequireClaim("SystemType").Build());
-                options.AddPolicy("Client", policy => policy.RequireClaim("ClientType").Build());
-                options.AddPolicy("Admin", policy => policy.RequireClaim("AdminType").Build());
+                options.AddPolicy("System", policy => policy.RequireClaim("System").Build());
+                options.AddPolicy("Client", policy => policy.RequireClaim("Client").Build());
+                options.AddPolicy("Admin", policy => policy.RequireClaim("Admin").Build());
             });
 
             services.AddScoped<IManageService, ManageService>();

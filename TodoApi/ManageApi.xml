@@ -223,6 +223,18 @@
             </summary>
             <param name="service"></param>
         </member>
+        <member name="M:ManageApi.Controllers.UserController.AddUser(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            注册用户
+            </summary>
+            <param name="Uname">用户名</param>
+            <param name="password">密码</param>
+            <param name="Icon">头像</param>
+            <param name="UNickname">昵称</param>
+            <param name="phone">电话</param>
+            <param name="Sub">角色</param>
+            <returns></returns>
+        </member>
         <member name="T:ManageApi.RayPIMemoryCache">
             <summary>
             
@@ -262,7 +274,7 @@
             
             </summary>
         </member>
-        <member name="M:ManageApi.RayPIToken.IssueJWT(ManageApi.TokenModel,System.TimeSpan,System.TimeSpan)">
+        <member name="M:ManageApi.RayPIToken.IssueJWT(Domain.User,System.TimeSpan,System.TimeSpan)">
             <summary>
             获取JWT字符串并存入缓存
             </summary>
@@ -293,46 +305,6 @@
             </summary>
             <param name="httpContext"></param>
             <returns></returns>
-        </member>
-        <member name="T:ManageApi.TokenModel">
-            <summary>
-            令牌类
-            </summary>
-        </member>
-        <member name="M:ManageApi.TokenModel.#ctor">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:ManageApi.TokenModel.Uid">
-            <summary>
-            用户Id
-            </summary>
-        </member>
-        <member name="P:ManageApi.TokenModel.Uname">
-            <summary>
-            用户名
-            </summary>
-        </member>
-        <member name="P:ManageApi.TokenModel.Phone">
-            <summary>
-            手机
-            </summary>
-        </member>
-        <member name="P:ManageApi.TokenModel.Icon">
-            <summary>
-            头像
-            </summary>
-        </member>
-        <member name="P:ManageApi.TokenModel.UNickname">
-            <summary>
-            昵称
-            </summary>
-        </member>
-        <member name="P:ManageApi.TokenModel.Sub">
-            <summary>
-            身份
-            </summary>
         </member>
     </members>
 </doc>
