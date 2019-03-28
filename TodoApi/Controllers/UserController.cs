@@ -27,14 +27,6 @@ namespace ManageApi.Controllers
         {
             _service = service;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [HttpPut("geta")]
-        public string Geta(string a)
-        {
-            return a;
-        }
+
     }
 }

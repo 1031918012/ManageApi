@@ -223,11 +223,116 @@
             </summary>
             <param name="service"></param>
         </member>
-        <member name="M:ManageApi.Controllers.UserController.Geta(System.String)">
+        <member name="T:ManageApi.RayPIMemoryCache">
             <summary>
             
             </summary>
+        </member>
+        <member name="F:ManageApi.RayPIMemoryCache._cache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ManageApi.RayPIMemoryCache.Exists(System.String)">
+            <summary>
+            验证缓存项是否存在
+            </summary>
+            <param name="key">缓存Key</param>
             <returns></returns>
+        </member>
+        <member name="M:ManageApi.RayPIMemoryCache.Get(System.String)">
+            <summary>
+            获取缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManageApi.RayPIMemoryCache.AddMemoryCache(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            添加缓存
+            </summary>
+            <param name="key">缓存Key</param>
+            <param name="value">缓存Value</param>
+            <param name="expiresSliding">滑动过期时长（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
+            <param name="expiressAbsoulte">绝对过期时长</param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageApi.RayPIToken">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ManageApi.RayPIToken.IssueJWT(ManageApi.TokenModel,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            获取JWT字符串并存入缓存
+            </summary>
+            <param name="tokenModel"></param>
+            <param name="expiresSliding"></param>
+            <param name="expiresAbsoulte"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageApi.TokenAuth">
+            <summary>
+            Token验证授权中间件
+            </summary>
+        </member>
+        <member name="F:ManageApi.TokenAuth._next">
+            <summary>
+            http委托
+            </summary>
+        </member>
+        <member name="M:ManageApi.TokenAuth.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:ManageApi.TokenAuth.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            验证授权
+            </summary>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageApi.TokenModel">
+            <summary>
+            令牌类
+            </summary>
+        </member>
+        <member name="M:ManageApi.TokenModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ManageApi.TokenModel.Uid">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:ManageApi.TokenModel.Uname">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:ManageApi.TokenModel.Phone">
+            <summary>
+            手机
+            </summary>
+        </member>
+        <member name="P:ManageApi.TokenModel.Icon">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:ManageApi.TokenModel.UNickname">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="P:ManageApi.TokenModel.Sub">
+            <summary>
+            身份
+            </summary>
         </member>
     </members>
 </doc>

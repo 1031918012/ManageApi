@@ -26,21 +26,19 @@ namespace TodoApi
             var attrs = context.ApiDescription.ActionDescriptor.AttributeRouteInfo;
 
             //先判断是否是匿名访问,
-            ControllerActionDescriptor descriptor = context.ApiDescription.ActionDescriptor as ControllerActionDescriptor;
-            if (descriptor != null)
+            if (context.ApiDescription.ActionDescriptor is ControllerActionDescriptor descriptor)
             {
-                var actionAttributes = descriptor.MethodInfo.GetCustomAttributes(inherit: true);
+                object[] actionAttributes = descriptor.MethodInfo.GetCustomAttributes(inherit: true);
                 bool isAnonymous = actionAttributes.Any(a => a is AllowAnonymousAttribute);
                 //非匿名的方法,链接中添加accesstoken值
                 if (!isAnonymous)
                 {
                     operation.Parameters.Add(new NonBodyParameter()
                     {
-                        Name = "token",
-                        In = "query",//query header body path formData
-                        Type = "string",
+                        Name = "Authorization",
+                        In = "header",//query header body path formData
+                        Type = "apiKey",
                         Description = "请求客户端来源",
-                        Required = false //是否必选
                     });
                 }
             }

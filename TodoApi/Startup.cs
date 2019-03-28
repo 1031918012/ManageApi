@@ -4,19 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication;
+using System.IdentityModel.Tokens.Jwt;
 using Domain;
 using Repositories;
 using System.IO;
 using Swashbuckle.AspNetCore.Swagger;
-using System;
 using System.Reflection;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Service;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Linq;
+using Microsoft.Extensions.Caching.Memory;
+using ManageApi;
 
 namespace TodoApi
 {
@@ -45,16 +44,6 @@ namespace TodoApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
-            //{
-            //    o.LoginPath = new PathString("/User/Login");
-            //    o.AccessDeniedPath = new PathString("/Error/Forbidden");
-            //});
-            //services.AddApiVersioning(options => {
-            //    options.ReportApiVersions = true;
-            //    options.AssumeDefaultVersionWhenUnspecified = true;
-            //    options.DefaultApiVersion = new ApiVersion(2, 0);
-            //    //});
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
@@ -64,11 +53,11 @@ namespace TodoApi
                     //允许所有来源，允许所有HTTP方法，允许所有作者的请求标头
                 });
             });
+
             services.AddDbContextPool<ManageContext>(opt =>
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"), b => b.MigrationsAssembly("Repositories"));
             });
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "ManageApi", Version = "v1" });
@@ -93,6 +82,14 @@ namespace TodoApi
                 //c.IncludeXmlComments(xmlDomainPath);
                 c.OperationFilter<AddAuthTokenHeaderParameter>();
             });
+            services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("System", policy => policy.RequireClaim("SystemType").Build());
+                options.AddPolicy("Client", policy => policy.RequireClaim("ClientType").Build());
+                options.AddPolicy("Admin", policy => policy.RequireClaim("AdminType").Build());
+            });
+
             services.AddScoped<IManageService, ManageService>();
             services.AddScoped<IManageRepository, ManageRepository>();
             services.AddScoped<ISalaryUnitOfWork, SalaryUnitOfWork>();
@@ -122,8 +119,8 @@ namespace TodoApi
                 c.SwaggerEndpoint("/swagger/user/swagger.json", "user");
             });
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
-            app.UseHttpsRedirection();
             app.UseAuthentication();
+            app.UseMiddleware<TokenAuth>();
             app.UseMvc();
         }
     }
