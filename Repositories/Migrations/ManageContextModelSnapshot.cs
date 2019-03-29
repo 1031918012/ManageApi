@@ -15,7 +15,7 @@ namespace Repositories.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
+                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -73,6 +73,37 @@ namespace Repositories.Migrations
                     b.HasKey("PeopleID");
 
                     b.ToTable("People");
+                });
+
+            modelBuilder.Entity("Domain.User", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("ID");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Sub")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("UNickname")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Uname")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.HasKey("ID");
+
+                    b.ToTable("User");
                 });
 #pragma warning restore 612, 618
         }

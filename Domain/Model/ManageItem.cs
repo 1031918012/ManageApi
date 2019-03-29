@@ -9,12 +9,12 @@ namespace Domain
     /// <summary>
     /// 书籍管理
     /// </summary>
-    public class ManageItem:IManage
+    public class ManageItem : IManage
     {
         /// <summary>
         /// 主键
         /// </summary>
-        public Guid BookID { get; set; } 
+        public Guid BookID { get; set; }
         /// <summary>
         /// 书籍名字
         /// </summary>

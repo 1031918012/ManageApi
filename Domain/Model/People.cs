@@ -7,7 +7,7 @@ namespace Domain
     /// <summary>
     /// 人员管理模型
     /// </summary>
-    public class People:IManage
+    public class People : IManage
     {
         /// <summary>
         /// 主键，人员id

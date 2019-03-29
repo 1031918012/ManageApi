@@ -53,10 +53,18 @@ namespace TodoApi
                     //允许所有来源，允许所有HTTP方法，允许所有作者的请求标头
                 });
             });
-
-            services.AddDbContextPool<ManageContext>(opt =>
+            services.AddScoped<IPeopleService, PeopleService>();
+            services.AddScoped<IPeopleRepository, PeopleRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IManageService, ManageService>();
+            services.AddScoped<IManageRepository, ManageRepository>();
+            services.AddScoped<ISalaryUnitOfWork, SalaryUnitOfWork>();
+            services.AddScoped<IRepositories<IManage>, EFRepositories<IManage>>();
+            services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
+            services.AddDbContextPool<ManageContext>(options =>
             {
-                opt.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"), b => b.MigrationsAssembly("Repositories"));
+                options.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"), b => b.MigrationsAssembly("Repositories"));
             });
             services.AddSwaggerGen(c =>
             {
@@ -82,7 +90,6 @@ namespace TodoApi
                 //c.IncludeXmlComments(xmlDomainPath);
                 c.OperationFilter<AddAuthTokenHeaderParameter>();
             });
-            services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("System", policy => policy.RequireClaim("System").Build());
@@ -90,10 +97,6 @@ namespace TodoApi
                 options.AddPolicy("Admin", policy => policy.RequireClaim("Admin").Build());
             });
 
-            services.AddScoped<IManageService, ManageService>();
-            services.AddScoped<IManageRepository, ManageRepository>();
-            services.AddScoped<ISalaryUnitOfWork, SalaryUnitOfWork>();
-            services.AddScoped<IRepositories<IManage>, EFRepositories<IManage>>();
         }
         /// <summary>
         /// 

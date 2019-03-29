@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Domain
-{ 
+{
     /// <summary>
-    /// 
+    /// 用户管理
     /// </summary>
-    public class User: IManage
+    public class User : IManage
     {
 
         /// <summary>

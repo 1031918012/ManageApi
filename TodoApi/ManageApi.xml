@@ -27,7 +27,7 @@
             </summary>
             <param name="args"></param>
         </member>
-        <member name="M:TodoApi.Program.CreateWebHostBuilder(System.String[])">
+        <member name="M:TodoApi.Program.BuildWebHost(System.String[])">
             <summary>
             
             </summary>
@@ -212,18 +212,18 @@
             
             </summary>
         </member>
-        <member name="F:ManageApi.Controllers.UserController._service">
+        <member name="F:ManageApi.Controllers.UserController._userService">
             <summary>
             
             </summary>
         </member>
-        <member name="M:ManageApi.Controllers.UserController.#ctor(Service.IManageService)">
+        <member name="M:ManageApi.Controllers.UserController.#ctor(Service.IUserService)">
             <summary>
             
             </summary>
-            <param name="service"></param>
+            <param name="userservice"></param>
         </member>
-        <member name="M:ManageApi.Controllers.UserController.AddUser(System.String,System.String,System.String,System.String,System.String,System.String)">
+        <member name="M:ManageApi.Controllers.UserController.AddUser(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
             注册用户
             </summary>
@@ -233,6 +233,7 @@
             <param name="UNickname">昵称</param>
             <param name="phone">电话</param>
             <param name="Sub">角色</param>
+            <param name="imageCheck">角色</param>
             <returns></returns>
         </member>
         <member name="T:ManageApi.RayPIMemoryCache">
@@ -270,6 +271,17 @@
             <returns></returns>
         </member>
         <member name="T:ManageApi.RayPIToken">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ManageApi.RayPIToken.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:ManageApi.RayPIToken.Configuration">
             <summary>
             
             </summary>

@@ -21,17 +21,17 @@ namespace TodoApi
         /// <param name="args"></param>
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            BuildWebHost(args).Run();
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseContentRoot(Directory.GetCurrentDirectory());
-               
+                .Build();
+
     }
 }

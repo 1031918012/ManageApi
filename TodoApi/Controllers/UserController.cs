@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using Domain;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -43,7 +44,7 @@ namespace ManageApi.Controllers
             var a = new User
             {
                 ID = new Guid(),
-                Password = password,//加密
+                Password = MD5.Create(password),//加密
                 Phone = phone,
                 Sub = Sub,
                 Uname = Uname,

@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -16,13 +17,25 @@ namespace ManageApi
     public class RayPIToken
     {
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configuration"></param>
+        public RayPIToken(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public IConfiguration Configuration { get; }
+        /// <summary>
         /// 获取JWT字符串并存入缓存
         /// </summary>
         /// <param name="tokenModel"></param>
         /// <param name="expiresSliding"></param>
         /// <param name="expiresAbsoulte"></param>
         /// <returns></returns>
-        public static string IssueJWT(User tokenModel, TimeSpan expiresSliding, TimeSpan expiresAbsoulte)
+        public string IssueJWT(User tokenModel, TimeSpan expiresSliding, TimeSpan expiresAbsoulte)
         {
             DateTime UTC = DateTime.UtcNow;
             Claim[] claims = new Claim[]
@@ -37,7 +50,7 @@ namespace ManageApi
             audience: tokenModel.Uname,//jwt的接收该方，非必须
             claims: claims,//声明集合
             expires: UTC.AddHours(12),//指定token的生命周期，unix时间戳格式,非必须
-            signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes("RayPI's Secret Key")), SecurityAlgorithms.HmacSha256));//使用私钥进行签名加密
+            signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["Authentication:JwtBearer:SecurityKey"].ToString())), SecurityAlgorithms.HmacSha256));//使用私钥进行签名加密
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);//生成最后的JWT字符串
 

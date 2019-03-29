@@ -15,7 +15,7 @@ namespace Repositories
             builder.HasKey(t => t.ID);
             builder.Property(t => t.ID).IsRequired().HasColumnName("ID");
             builder.Property(t => t.Password).IsRequired().HasMaxLength(100);
-            builder.Property(t => t.Phone).IsRequired().HasColumnType("char(11)");
+            builder.Property(t => t.Phone).IsRequired().HasMaxLength(100);
             builder.Property(t => t.Uname).IsRequired().HasMaxLength(100);
             builder.Property(t => t.UNickname).IsRequired().HasMaxLength(100);
             builder.Property(t => t.Sub).IsRequired().HasMaxLength(100);

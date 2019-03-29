@@ -5,15 +5,10 @@ namespace Repositories
 {
     public class ManageContext : DbContext
     {
-        public ManageContext(DbContextOptions<ManageContext> options) : base(options)
-        {
-
-        }
+        public ManageContext(DbContextOptions<ManageContext> options): base(options){ }
+        public DbSet<User> Users { get; set; }
         public DbSet<ManageItem> ManageItems { get; set; }
         public DbSet<People> Peoples { get; set; }
-        public DbSet<User> UseUsers { get; set; }
-
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
