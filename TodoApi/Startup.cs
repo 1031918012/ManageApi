@@ -69,7 +69,7 @@ namespace TodoApi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "ManageApi", Version = "v1" });
-                c.SwaggerDoc("user", new Info { Title = "user", Version = "user" });
+                c.SwaggerDoc("v2", new Info { Title = "v2", Version = "v2" });
                 c.DocInclusionPredicate((docName, apiDesc) =>
                 {
                     if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo))
@@ -119,7 +119,7 @@ namespace TodoApi
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ManageApi");
-                c.SwaggerEndpoint("/swagger/user/swagger.json", "user");
+                c.SwaggerEndpoint("/swagger/v2/swagger.json", "v2");
             });
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseAuthentication();

@@ -11,7 +11,7 @@ namespace ManageApi.Controllers
     /// <summary>
     /// 
     /// </summary>
-    [Route("api/[controller]"), ApiExplorerSettings(GroupName = "people")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PeopleController : ControllerBase
     {

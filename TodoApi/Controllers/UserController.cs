@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using Domain;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using MyEncrypt;
 using Newtonsoft.Json;
 using Service;
 
@@ -11,7 +12,7 @@ namespace ManageApi.Controllers
     /// <summary>
     /// 
     /// </summary>
-    [Route("api/[controller]"), ApiExplorerSettings(GroupName = "user")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -44,7 +45,7 @@ namespace ManageApi.Controllers
             var a = new User
             {
                 ID = new Guid(),
-                Password = MD5.Create(password),//加密
+                Password = MD5Encrypt.Encrypt(password),//加密
                 Phone = phone,
                 Sub = Sub,
                 Uname = Uname,
