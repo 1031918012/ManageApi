@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace TodoApi
@@ -29,8 +23,12 @@ namespace TodoApi
         /// <param name="args"></param>
         /// <returns></returns>
         public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
+            WebHost.CreateDefaultBuilder(args).ConfigureLogging((context, loggingBuilder) =>
+            {
+                loggingBuilder.AddFilter("System", LogLevel.Warning);
+                loggingBuilder.AddFilter("Microsoft", LogLevel.Warning);//过滤掉系统默认的一些日志
+                loggingBuilder.AddLog4Net();
+            }).UseStartup<Startup>()
                 .Build();
 
     }

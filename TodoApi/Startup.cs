@@ -1,21 +1,24 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Domain;
+using Infrastructure.Filter;
+using ManageApi;
+using ManageApi.DependenciesInit;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication;
-using System.IdentityModel.Tokens.Jwt;
-using Domain;
 using Repositories;
-using System.IO;
-using Swashbuckle.AspNetCore.Swagger;
-using System.Reflection;
 using Service;
+using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System;
+using System.IO;
 using System.Linq;
-using Microsoft.Extensions.Caching.Memory;
-using ManageApi;
+using System.Reflection;
 
 namespace TodoApi
 {
@@ -41,9 +44,11 @@ namespace TodoApi
         /// </summary>
         /// <param name="services"></param>
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(o=> {
+                o.Filters.Add(typeof(CustomExceptionFilterAttribute));
+            });
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
@@ -53,15 +58,9 @@ namespace TodoApi
                     //允许所有来源，允许所有HTTP方法，允许所有作者的请求标头
                 });
             });
-            services.AddScoped<IPeopleService, PeopleService>();
-            services.AddScoped<IPeopleRepository, PeopleRepository>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IManageService, ManageService>();
-            services.AddScoped<IManageRepository, ManageRepository>();
-            services.AddScoped<ISalaryUnitOfWork, SalaryUnitOfWork>();
-            services.AddScoped<IRepositories<IManage>, EFRepositories<IManage>>();
-            services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
+
+            
+           
             services.AddDbContextPool<ManageContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"), b => b.MigrationsAssembly("Repositories"));
@@ -96,8 +95,24 @@ namespace TodoApi
                 options.AddPolicy("Client", policy => policy.RequireClaim("Client").Build());
                 options.AddPolicy("Admin", policy => policy.RequireClaim("Admin").Build());
             });
-
-        }   
+            #region autofac
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterModule<DependenciesInit>();
+            //替换完容器，构造控制器需要的参数，是autofac做的，但是控制器本身是ServiceCollection做的，包括内置的那几个
+            containerBuilder.Populate(services);
+            //services.AddScoped<IPeopleService, PeopleService>();
+            //services.AddScoped<IPeopleRepository, PeopleRepository>();
+            //services.AddScoped<IUserService, UserService>();
+            //services.AddScoped<IUserRepository, UserRepository>();
+            //services.AddScoped<IManageService, ManageService>();
+            //services.AddScoped<IManageRepository, ManageRepository>();
+            //services.AddScoped<ISalaryUnitOfWork, SalaryUnitOfWork>();
+            //services.AddScoped<IRepositories<IManage>, EFRepositories<IManage>>();
+            //services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
+            var container = containerBuilder.Build();
+            return new AutofacServiceProvider(container);
+            #endregion
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -124,6 +139,7 @@ namespace TodoApi
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseAuthentication();
             app.UseMiddleware<TokenAuth>();
+
             app.UseMvc();
         }
     }

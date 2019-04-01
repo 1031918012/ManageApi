@@ -34,7 +34,8 @@ namespace ManageApi.Controllers
         [HttpPost("AddOnePeople")]
         public OkResult AddOnePeople(string name)
         {
-            return Ok();
+            throw new Exception("yichangceshi");
+           // return Ok();
         } 
     }
 }
