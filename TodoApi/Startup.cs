@@ -116,6 +116,7 @@ namespace TodoApi
                 app.UseHsts();
             }
             app.UseStaticFiles();
+            app.UseSession();
             app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
             app.UseSwaggerUI(c =>
             {

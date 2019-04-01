@@ -45,7 +45,9 @@ namespace ManageApi
                 //检测是否包含'Authorization'请求头，如果不包含返回context进行下一个中间件，用于访问不需要认证的API
                 if (!headers.ContainsKey("Authorization"))
                 {
-                    return _next(httpContext);
+                    httpContext.Response.StatusCode = 301;
+                    httpContext.Response.WriteAsync("登陆缓存验证字符串已经过期");
+                    return Task.CompletedTask;
                 }
                 var tokenStr = headers["Authorization"];
                 try
