@@ -12,7 +12,7 @@ namespace ManageApi.Controllers
     /// <summary>
     /// 
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]"),ApiExplorerSettings(GroupName = "SalaryCommon")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -58,7 +58,6 @@ namespace ManageApi.Controllers
                 return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = false, Message = "添加用户失败" });
             }
             return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = true,Message = "添加用户成功" });
-
         }
     }
 }

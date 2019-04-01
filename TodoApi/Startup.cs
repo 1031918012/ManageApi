@@ -58,9 +58,15 @@ namespace TodoApi
                     //允许所有来源，允许所有HTTP方法，允许所有作者的请求标头
                 });
             });
-
-            
-           
+            services.AddScoped<IPeopleService, PeopleService>();
+            services.AddScoped<IPeopleRepository, PeopleRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IManageService, ManageService>();
+            services.AddScoped<IManageRepository, ManageRepository>();
+            services.AddScoped<ISalaryUnitOfWork, SalaryUnitOfWork>();
+            services.AddScoped<IRepositories<IManage>, EFRepositories<IManage>>();
+            services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
             services.AddDbContextPool<ManageContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"), b => b.MigrationsAssembly("Repositories"));
@@ -130,6 +136,7 @@ namespace TodoApi
                 app.UseHsts();
             }
             app.UseStaticFiles();
+            app.UseSession();
             app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
             app.UseSwaggerUI(c =>
             {
