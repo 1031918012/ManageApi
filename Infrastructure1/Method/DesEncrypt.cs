@@ -2,6 +2,7 @@
 //using System.Collections.Generic;
 //using System.IO;
 //using System.Linq;
+//using System.Reflection.Metadata;
 //using System.Security.Cryptography;
 //using System.Text;
 //using System.Threading.Tasks;
@@ -16,7 +17,7 @@
 //    /// </summary>
 //    public class DesEncrypt
 //    {
-//        private static readonly byte[] _rgbKey = Encoding.ASCII.GetBytes(Constant.DesKey.Substring(0, 8));
+//        private static readonly byte[] _rgbKey = Encoding.ASCII.GetBytes(Constant.Substring(0, 8));
 //        private static readonly byte[] _rgbIV = Encoding.ASCII.GetBytes(Constant.DesKey.Insert(0, "w").Substring(0, 8));
 
 //        /// <summary>
@@ -42,7 +43,7 @@
 //        /// <summary>
 //        /// DES解密
 //        /// </summary>
-//        /// <param name="encryptText"></param>
+//        ///// <param name="encryptText"></param>
 //        /// <returns>解密后的结果</returns>
 //        public static string Decrypt(string encryptText)
 //        {
@@ -54,7 +55,7 @@
 //                CryptoStream crypStream = new CryptoStream(memStream, dsp.CreateDecryptor(_rgbKey, _rgbIV), CryptoStreamMode.Write);
 //                crypStream.Write(buffer, 0, buffer.Length);
 //                crypStream.FlushFinalBlock();
-//                return ASCIIEncoding.UTF8.GetString(memStream.ToArray());
+//                return Encoding.UTF8.GetString(memStream.ToArray());
 //            }
 //        }
 //    }

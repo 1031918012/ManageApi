@@ -10,7 +10,7 @@ namespace TodoApi
     /// <summary>
     /// 
     /// </summary>
-    public class AddAuthTokenHeaderParameter : IOperationFilter
+    public class AddAuthTokenHeaderParameter : AuthorizeAttribute,IOperationFilter
     {
         /// <summary>
         /// 

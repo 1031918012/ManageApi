@@ -37,8 +37,9 @@ namespace ManageApi.Controllers
         /// <param name="UNickname">昵称</param>
         /// <param name="phone">电话</param>
         /// <param name="Sub">角色</param>
-        /// <param name="imageCheck">角色</param>
+        /// <param name="imageCheck">图片验证码</param>
         /// <returns></returns>
+        [HttpPost("AddUser")]
         public string AddUser(string Uname, string password, string phone, string Icon, string UNickname, string Sub,string imageCheck)
         {
             //图像验证码
