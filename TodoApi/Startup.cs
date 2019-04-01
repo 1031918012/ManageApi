@@ -61,6 +61,7 @@ namespace TodoApi
             services.AddScoped<IManageRepository, ManageRepository>();
             services.AddScoped<ISalaryUnitOfWork, SalaryUnitOfWork>();
             services.AddScoped<IRepositories<IManage>, EFRepositories<IManage>>();
+
             services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
             services.AddDbContextPool<ManageContext>(options =>
             {
