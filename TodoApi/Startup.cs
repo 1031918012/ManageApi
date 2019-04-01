@@ -58,6 +58,7 @@ namespace TodoApi
                     //允许所有来源，允许所有HTTP方法，允许所有作者的请求标头
                 });
             });
+            services.AddScoped<RayPIToken>();
             services.AddScoped<IPeopleService, PeopleService>();
             services.AddScoped<IPeopleRepository, PeopleRepository>();
             services.AddScoped<IUserService, UserService>();
@@ -74,7 +75,7 @@ namespace TodoApi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "ManageApi", Version = "v1" });
-                //c.SwaggerDoc("user", new Info { Title = "user", Version = "user" });
+                c.SwaggerDoc("SalaryCommon", new Info { Title = "SalaryCommon", Version = "SalaryCommon" });
                 c.DocInclusionPredicate((docName, apiDesc) =>
                 {
                     if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo))
@@ -136,12 +137,12 @@ namespace TodoApi
                 app.UseHsts();
             }
             app.UseStaticFiles();
-            app.UseSession();
+            //app.UseSession();
             app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ManageApi");
-                //c.SwaggerEndpoint("/swagger/user/swagger.json", "user");
+                c.SwaggerEndpoint("/swagger/SalaryCommon/swagger.json", "SalaryCommon");
             });
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseAuthentication();

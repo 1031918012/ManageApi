@@ -217,11 +217,23 @@
             
             </summary>
         </member>
-        <member name="M:ManageApi.Controllers.UserController.#ctor(Service.IUserService)">
+        <member name="P:ManageApi.Controllers.UserController.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ManageApi.Controllers.UserController.rayPIToken">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ManageApi.Controllers.UserController.#ctor(Service.IUserService,Microsoft.Extensions.Configuration.IConfiguration,ManageApi.RayPIToken)">
             <summary>
             
             </summary>
             <param name="userservice"></param>
+            <param name="Configuration"></param>
+            <param name="rayPIToken"></param>
         </member>
         <member name="M:ManageApi.Controllers.UserController.AddUser(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
@@ -235,6 +247,25 @@
             <param name="Sub">角色</param>
             <param name="imageCheck">图片验证码</param>
             <returns></returns>
+        </member>
+        <member name="M:ManageApi.Controllers.UserController.Login(System.String,System.String)">
+            <summary>
+            登陆用户
+            </summary>
+            <param name="Uname">用户名</param>
+            <param name="password">密码</param>
+            <returns></returns>
+        </member>
+        <member name="T:ManageApi.DependenciesInit.DependenciesInit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ManageApi.DependenciesInit.DependenciesInit.Load(Autofac.ContainerBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="builder"></param>
         </member>
         <member name="T:ManageApi.RayPIMemoryCache">
             <summary>

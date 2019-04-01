@@ -35,7 +35,7 @@ namespace ManageApi
         /// <param name="expiresSliding"></param>
         /// <param name="expiresAbsoulte"></param>
         /// <returns></returns>
-        public string IssueJWT(User tokenModel, TimeSpan expiresSliding, TimeSpan expiresAbsoulte)
+        public string  IssueJWT(User tokenModel, TimeSpan expiresSliding, TimeSpan expiresAbsoulte)
         {
             DateTime UTC = DateTime.UtcNow;
             Claim[] claims = new Claim[]
