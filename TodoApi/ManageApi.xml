@@ -256,6 +256,18 @@
             <param name="password">密码</param>
             <returns></returns>
         </member>
+        <member name="T:ManageApi.DependenciesInit.AotufacInite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ManageApi.DependenciesInit.AotufacInite.ConvertToAutofac(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            通过反射实现自动化容器注册
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
         <member name="T:ManageApi.DependenciesInit.DependenciesInit">
             <summary>
             
