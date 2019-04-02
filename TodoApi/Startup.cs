@@ -58,16 +58,16 @@ namespace TodoApi
                     //允许所有来源，允许所有HTTP方法，允许所有作者的请求标头
                 });
             });
-            services.AddScoped<RayPIToken>();
-            services.AddScoped<IPeopleService, PeopleService>();
-            services.AddScoped<IPeopleRepository, PeopleRepository>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IManageService, ManageService>();
-            services.AddScoped<IManageRepository, ManageRepository>();
-            services.AddScoped<ISalaryUnitOfWork, SalaryUnitOfWork>();
-            services.AddScoped<IRepositories<IManage>, EFRepositories<IManage>>();
-            services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
+            //services.AddScoped<RayPIToken>();
+            //services.AddScoped<IPeopleService, PeopleService>();
+            //services.AddScoped<IPeopleRepository, PeopleRepository>();
+            //services.AddScoped<IUserService, UserService>();
+            //services.AddScoped<IUserRepository, UserRepository>();
+            //services.AddScoped<IManageService, ManageService>();
+            //services.AddScoped<IManageRepository, ManageRepository>();
+            //services.AddScoped<ISalaryUnitOfWork, SalaryUnitOfWork>();
+            //services.AddScoped<IRepositories<IManage>, EFRepositories<IManage>>();
+            //services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
             services.AddDbContextPool<ManageContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"), b => b.MigrationsAssembly("Repositories"));
@@ -103,21 +103,13 @@ namespace TodoApi
                 options.AddPolicy("Admin", policy => policy.RequireClaim("Admin").Build());
             });
             #region autofac
-            var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterModule<DependenciesInit>();
-            //替换完容器，构造控制器需要的参数，是autofac做的，但是控制器本身是ServiceCollection做的，包括内置的那几个
-            containerBuilder.Populate(services);
-            //services.AddScoped<IPeopleService, PeopleService>();
-            //services.AddScoped<IPeopleRepository, PeopleRepository>();
-            //services.AddScoped<IUserService, UserService>();
-            //services.AddScoped<IUserRepository, UserRepository>();
-            //services.AddScoped<IManageService, ManageService>();
-            //services.AddScoped<IManageRepository, ManageRepository>();
-            //services.AddScoped<ISalaryUnitOfWork, SalaryUnitOfWork>();
-            //services.AddScoped<IRepositories<IManage>, EFRepositories<IManage>>();
-            //services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
-            var container = containerBuilder.Build();
-            return new AutofacServiceProvider(container);
+            //var containerBuilder = new ContainerBuilder();
+            //containerBuilder.RegisterModule<DependenciesInit>();
+            ////替换完容器，构造控制器需要的参数，是autofac做的，但是控制器本身是ServiceCollection做的，包括内置的那几个
+            //containerBuilder.Populate(services);
+            //var container = containerBuilder.Build();
+            //return new AutofacServiceProvider(container);
+
             #endregion
         }
         /// <summary>
