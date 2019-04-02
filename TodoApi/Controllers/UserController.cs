@@ -1,13 +1,12 @@
-﻿using System;
-using System.Security.Cryptography;
-using System.Text.RegularExpressions;
-using Domain;
+﻿using Domain;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MyEncrypt;
 using Newtonsoft.Json;
 using Service;
+using System;
+using System.Text.RegularExpressions;
 
 namespace ManageApi.Controllers
 {
@@ -102,6 +101,10 @@ namespace ManageApi.Controllers
                 return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = true, Message = "请输入密码" });
             }
             var user = _userService.GetUser(Uname);
+            if (user == null)
+            {
+                return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = true, Message = "请输入正确的用户名" });
+            }
             if (MD5Encrypt.Encrypt(password) != user.Password)
             {
                 return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = true, Message = "密码错误" });
