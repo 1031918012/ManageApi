@@ -11,6 +11,7 @@ using Repositories;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -81,6 +82,15 @@ namespace TodoApi
                 c.IncludeXmlComments(xmlControllPath);
                 //c.IncludeXmlComments(xmlDomainPath);
                 c.OperationFilter<AddAuthTokenHeaderParameter>();
+                var security = new Dictionary<string, IEnumerable<string>> { { "Bearer", new string[] { } }, };
+                c.AddSecurityRequirement(security);//添加一个必须的全局安全信息，和AddSecurityDefinition方法指定的方案名称要一致，这里是Bearer。
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT授权(数据将在请求头中进行传输) 参数结构: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",//jwt默认的参数名称
+                    In = "header",//jwt默认存放Authorization信息的位置(请求头中)
+                    Type = "apiKey"
+                });
             });
             services.AddAuthorization(options =>
             {

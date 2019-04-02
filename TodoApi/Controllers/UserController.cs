@@ -111,7 +111,7 @@ namespace ManageApi.Controllers
             }
             string token = rayPIToken.IssueJWT(user, new TimeSpan(0, 1, 0), new TimeSpan(1, 0, 0));
 
-            return token;
+            return "Bearer"+token;
         }
     }
 }
