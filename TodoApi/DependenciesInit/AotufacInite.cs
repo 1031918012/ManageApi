@@ -33,8 +33,10 @@ namespace ManageApi.DependenciesInit
             var DomainAccess = Assembly.Load("Domain");
 
             containerBuilder.RegisterTypes(dataAccess.GetTypes());
+            containerBuilder.RegisterTypes(infrastructureAccess.GetTypes());
             containerBuilder.RegisterTypes(serviceAccess.GetTypes()).AsImplementedInterfaces();
             containerBuilder.RegisterTypes(infrastructureAccess.GetTypes()).AsImplementedInterfaces();
+
             containerBuilder.RegisterTypes(RepositoriesAccess.GetTypes()).AsImplementedInterfaces();
             containerBuilder.RegisterTypes(DomainAccess.GetTypes()).AsImplementedInterfaces();
 

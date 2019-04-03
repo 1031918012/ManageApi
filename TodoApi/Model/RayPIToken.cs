@@ -1,13 +1,11 @@
 ﻿using Domain;
+using Infrastructure.Redis.RedisServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ManageApi
 {
@@ -20,14 +18,17 @@ namespace ManageApi
         /// 
         /// </summary>
         /// <param name="configuration"></param>
-        public RayPIToken(IConfiguration configuration)
+        /// <param name="redisStringService"></param>
+        public RayPIToken(IConfiguration configuration, RedisStringService redisStringService)
         {
             Configuration = configuration;
+            _redisStringService = redisStringService;
         }
         /// <summary>
         /// 
         /// </summary>
         public IConfiguration Configuration { get; }
+        private RedisStringService _redisStringService { get; set; }
         /// <summary>
         /// 获取JWT字符串并存入缓存
         /// </summary>
@@ -35,7 +36,7 @@ namespace ManageApi
         /// <param name="expiresSliding"></param>
         /// <param name="expiresAbsoulte"></param>
         /// <returns></returns>
-        public string  IssueJWT(User tokenModel, TimeSpan expiresSliding, TimeSpan expiresAbsoulte)
+        public string IssueJWT(User tokenModel, TimeSpan expiresSliding, TimeSpan expiresAbsoulte)
         {
             DateTime UTC = DateTime.UtcNow;
             Claim[] claims = new Claim[]
@@ -54,7 +55,9 @@ namespace ManageApi
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);//生成最后的JWT字符串
 
-            RayPIMemoryCache.AddMemoryCache(encodedJwt, tokenModel, expiresSliding, expiresAbsoulte);//将JWT字符串和tokenModel作为key和value存入缓存
+            //RayPIMemoryCache.AddMemoryCache(encodedJwt, tokenModel, expiresSliding, expiresAbsoulte);//将JWT字符串和tokenModel作为key和value存入缓存
+            _redisStringService.Set(encodedJwt, tokenModel.ID.ToString(), expiresAbsoulte);
+            
             return encodedJwt;
         }
     }
