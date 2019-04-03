@@ -1,4 +1,7 @@
-﻿namespace Infrastructure.Redis.Inite
+﻿using Microsoft.Extensions.Configuration;
+using System.IO;
+
+namespace Infrastructure.Redis.Inite
 {
     public class RedisConfigInfo
     {
@@ -8,12 +11,12 @@
         /// 
         /// 默认6379端口
         /// </summary>
-        public string WriteServerList = "127.0.0.1:6379";
+        public string WriteServerList = "";
         /// <summary>
         /// 可读的Redis链接地址
         /// format:ip1,ip2
         /// </summary>
-        public string ReadServerList = "127.0.0.1:6379";
+        public string ReadServerList = "";
         /// <summary>
         /// 最大写链接数
         /// </summary>
@@ -35,5 +38,15 @@
         /// 如redis工作正常,请关闭该项
         /// </summary>
         public bool RecordeLog = false;
+
+        public RedisConfigInfo()
+        {
+            //添加 json 文件路径
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
+            //创建配置根对象
+            var configurationRoot = builder.Build();
+            WriteServerList = configurationRoot.GetSection("RedisIp").GetSection("WriteServerList").Value;
+            ReadServerList = configurationRoot.GetSection("RedisIp").GetSection("ReadServerList").Value;
+        }
     }
 }
