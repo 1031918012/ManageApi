@@ -52,9 +52,10 @@ namespace ManageApi
                     httpContext.Response.WriteAsync("登陆缓存验证字符串已经过期");
                     return Task.CompletedTask;
                 }
-                var tokenStr = headers["Authorization"];
+                string tokenStr = headers["Authorization"];
                 try
                 {
+                    var a = tokenStr.Remove(0, 6);
                     //验证缓存中是否存在该jwt字符串
                     //if (!RayPIMemoryCache.Exists(tokenStr))
                     if(string.IsNullOrEmpty(_redisStringService.Get(tokenStr)))
