@@ -56,7 +56,7 @@ namespace ManageApi
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);//生成最后的JWT字符串
 
             //RayPIMemoryCache.AddMemoryCache(encodedJwt, tokenModel, expiresSliding, expiresAbsoulte);//将JWT字符串和tokenModel作为key和value存入缓存
-            _redisStringService.Set(encodedJwt, tokenModel.ID.ToString(), expiresAbsoulte);
+            _redisStringService.Set(encodedJwt, tokenModel, expiresAbsoulte);
             
             return encodedJwt;
         }
