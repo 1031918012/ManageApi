@@ -36,43 +36,80 @@ namespace ManageApi.Controllers
         public OkResult AddOnePeople(string name)
         {
             throw new Exception("yichangceshi");
-           // return Ok();
+            // return Ok();
         }
         /// <summary>
-         /// 
-         /// </summary>
-         /// <returns></returns>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("AddOPeople")]
-        public Tuple<TimeSpan, TimeSpan, TimeSpan> AddOPeople()
+        public TimeSpan AddOPeople()
         {
             List<People> list = new List<People>();
-            People people = new People
-            {
-                BankCard = "123",
-                Creator = "1",
-                IDCard = "420114199602191215",
-                Name = "1",
-                PeopleID = Guid.NewGuid()
-            };
             for (int i = 0; i < 10000; i++)
             {
+                People people = new People
+                {
+                    PeopleID = Guid.NewGuid(),
+                    BankCard = "123",
+                    Creator = "1",
+                    IDCard = "420114199602191215",
+                    Name = "1"
+                };
                 list.Add(people);
             }
             DateTime now = DateTime.Now;
-            list.ForEach(s => 
+            list.ForEach(s =>
             {
                 _people.AddPeople(s);
             });
-            DateTime end = DateTime.Now;
+            return DateTime.Now - now;
+        } /// <summary>
+          /// 
+          /// </summary>
+          /// <returns></returns>
+        [HttpPost("AddOPeople1")]
+        public TimeSpan AddOPeople1()
+        {
+            List<People> list = new List<People>();
+            for (int i = 0; i < 10000; i++)
+            {
+                People people = new People
+                {
+                    PeopleID = Guid.NewGuid(),
+                    BankCard = "123",
+                    Creator = "1",
+                    IDCard = "420114199602191215",
+                    Name = "1"
+                };
+                list.Add(people);
+            }
+            DateTime now = DateTime.Now;
             _people.Addpeoplelist(list);
-            DateTime date = DateTime.Now;
+            return DateTime.Now - now;
+        } /// <summary>
+          /// 
+          /// </summary>
+          /// <returns></returns>
+        [HttpPost("AddOPeople2")]
+        public TimeSpan AddOPeople2()
+        {
+            List<People> list = new List<People>();
+            for (int i = 0; i < 10000; i++)
+            {
+                People people = new People
+                {
+                    PeopleID = Guid.NewGuid(),
+                    BankCard = "123",
+                    Creator = "1",
+                    IDCard = "420114199602191215",
+                    Name = "1"
+                };
+                list.Add(people);
+            }
+            DateTime now = DateTime.Now;
             _people.Addpeoplelistasyn(list);
-            DateTime time = DateTime.Now;
-            TimeSpan dateTime = end - now;
-            TimeSpan dateTime2 = date - end;
-            TimeSpan dateTime3 = time - date;
-            Tuple<TimeSpan, TimeSpan, TimeSpan> a = new Tuple<TimeSpan, TimeSpan, TimeSpan>(dateTime, dateTime2,dateTime3);
-            return a;
+            return DateTime.Now - now;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Infrastructure.Redis.RedisServer
         public bool Set<T>(string key, T value, TimeSpan sp)
         {
             bool isset = _iClient.Set(key, value, sp);
-            Dispose();
+            //Dispose();
             return isset;
         }
         /// <summary>

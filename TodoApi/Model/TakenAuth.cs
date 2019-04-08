@@ -78,7 +78,7 @@ namespace ManageApi
                     httpContext.User = principal;
                     return _next(httpContext);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     return httpContext.Response.WriteAsync("token验证异常");
                 }

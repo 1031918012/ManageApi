@@ -213,6 +213,18 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:ManageApi.Controllers.PeopleController.AddOPeople1">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageApi.Controllers.PeopleController.AddOPeople2">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ManageApi.Controllers.UserController">
             <summary>
             
