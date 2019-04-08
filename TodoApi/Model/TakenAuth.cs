@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Infrastructure.Redis.RedisServer;
+using Newtonsoft.Json;
 
 namespace ManageApi
 {
@@ -59,13 +60,15 @@ namespace ManageApi
                     var a = tokenStr.Remove(0, 6);
                     //验证缓存中是否存在该jwt字符串
                     //if (!RayPIMemoryCache.Exists(tokenStr))
-                    if(string.IsNullOrEmpty(_redisStringService.Get(tokenStr)))
+                    string userJson = _redisStringService.Get(a);
+                    if (string.IsNullOrEmpty(userJson))
                     {
                         httpContext.Response.StatusCode = 301;
                         httpContext.Response.WriteAsync("登陆缓存验证字符串已经过期");
                         return Task.CompletedTask;
                     }
-                    User tm = (User)RayPIMemoryCache.Get(tokenStr);
+                    //User tm = (User)RayPIMemoryCache.Get(tokenStr);
+                    User tm = JsonConvert.DeserializeObject<User>(userJson);
                     //提取tokenModel中的Sub属性进行authorize认证
                     List<Claim> lc = new List<Claim>();
                     Claim c = new Claim(tm.Sub, tm.Sub);

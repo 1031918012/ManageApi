@@ -30,7 +30,7 @@ namespace Infrastructure.Redis.RedisServer
         /// </summary>
         public bool Set<T>(string key, T value, TimeSpan sp)
         {
-            bool isset = _iClient.Set<T>(key, value, sp);
+            bool isset = _iClient.Set(key, value, sp);
             Dispose();
             return isset;
         }
