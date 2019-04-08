@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using Domain;
+using EFCore.BulkExtensions;
 using Infrastructure;
 
 namespace Repositories
@@ -37,6 +38,15 @@ namespace Repositories
         {
             _context.Set<TManage>().Update(manage);
         }
+        
+        void ISalaryUnitOfWork.AddRange<TManage>(List<TManage> manage)
+        {
+            _context.BulkInsert(manage);
+        }
 
+        void ISalaryUnitOfWork.AddRangeasyn<TManage>(List<TManage> manage)
+        {
+            _context.BulkInsertAsync(manage);
+        }
     }
 }

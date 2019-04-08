@@ -6,8 +6,9 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>E:\testcode\shenfenyanzhen\TodoApi\ManageApi.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\Kai\source\repos\ManageApi3\TodoApi\ManageApi.xml</DocumentationFile>
   </PropertyGroup>
+
   
   
   <ItemGroup>

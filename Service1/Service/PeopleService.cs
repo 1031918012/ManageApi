@@ -18,5 +18,16 @@ namespace Service
             _salaryUnitOfWork.Add(people);
             return _salaryUnitOfWork.Commit();
         }
+        public bool Addpeoplelist(List<People> peoples)
+        {
+            _salaryUnitOfWork.AddRange(peoples);
+            return _salaryUnitOfWork.Commit();
+        }
+
+        public bool Addpeoplelistasyn(List<People> peoples)
+        {
+            _salaryUnitOfWork.AddRangeasyn(peoples);
+            return _salaryUnitOfWork.Commit();
+        }
     }
 }

@@ -207,6 +207,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:ManageApi.Controllers.PeopleController.AddOPeople">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ManageApi.Controllers.UserController">
             <summary>
             
@@ -354,6 +360,7 @@
             构造函数
             </summary>
             <param name="next"></param>
+            <param name="redisStringService"></param>
         </member>
         <member name="M:ManageApi.TokenAuth.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>

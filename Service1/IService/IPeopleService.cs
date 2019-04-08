@@ -8,5 +8,9 @@ namespace Service
     public interface IPeopleService
     {
         bool AddPeople(People people);
+        bool Addpeoplelist(List<People> peoples);
+
+        bool Addpeoplelistasyn(List<People> peoples);
+
     }
 }

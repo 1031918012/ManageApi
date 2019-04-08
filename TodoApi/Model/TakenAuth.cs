@@ -22,6 +22,7 @@ namespace ManageApi
         /// 构造函数
         /// </summary>
         /// <param name="next"></param>
+        /// <param name="redisStringService"></param>
         public TokenAuth(RequestDelegate next,RedisStringService redisStringService)
         {
             _next = next;

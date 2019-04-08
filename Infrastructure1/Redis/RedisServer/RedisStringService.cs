@@ -12,8 +12,8 @@ namespace Infrastructure.Redis.RedisServer
         /// </summary>
         public bool Set<T>(string key, T value)
         {
-            bool isset = base._iClient.Set<T>(key, value);
-            base.Dispose();
+            bool isset = _iClient.Set(key, value);
+            Dispose();
             return isset;
         }
         /// <summary>
@@ -21,8 +21,8 @@ namespace Infrastructure.Redis.RedisServer
         /// </summary>
         public bool Set<T>(string key, T value, DateTime dt)
         {
-            bool isset = base._iClient.Set<T>(key, value, dt);
-            base.Dispose();
+            bool isset = _iClient.Set(key, value, dt);
+            Dispose();
             return isset;
         }
         /// <summary>
@@ -30,8 +30,8 @@ namespace Infrastructure.Redis.RedisServer
         /// </summary>
         public bool Set<T>(string key, T value, TimeSpan sp)
         {
-            bool isset = base._iClient.Set<T>(key, value, sp);
-            base.Dispose();
+            bool isset = _iClient.Set<T>(key, value, sp);
+            Dispose();
             return isset;
         }
         /// <summary>
@@ -39,7 +39,7 @@ namespace Infrastructure.Redis.RedisServer
         /// </summary>
         public void Set(Dictionary<string, string> dic)
         {
-            base._iClient.SetAll(dic);
+            _iClient.SetAll(dic);
         }
 
         #endregion

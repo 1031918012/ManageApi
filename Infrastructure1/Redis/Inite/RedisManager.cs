@@ -30,6 +30,7 @@ namespace Infrastructure.Redis.Inite
         /// </summary>
         private static void CreateManager()
         {
+
             string[] WriteServerConStr = RedisConfigInfo.WriteServerList.Split(',');
             string[] ReadServerConStr = RedisConfigInfo.ReadServerList.Split(',');
             prcManager = new PooledRedisClientManager(ReadServerConStr, WriteServerConStr,

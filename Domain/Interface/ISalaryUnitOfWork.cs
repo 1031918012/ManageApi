@@ -23,11 +23,14 @@ namespace Domain
         /// <typeparam name="TManage"></typeparam>
         /// <param name="manage"></param>
         void Update<TManage>(TManage manage) where TManage : class, IManage;
+        void AddRangeasyn<TManage>(List<TManage> manage) where TManage : class, IManage;
+
         /// <summary>
         /// 删除
         /// </summary>
         /// <typeparam name="TManage"></typeparam>
         /// <param name="manage"></param>
         void Delete<TManage>(TManage manage) where TManage : class, IManage;
+        void AddRange<TManage>(List<TManage> manage) where TManage : class, IManage;
     }
 }

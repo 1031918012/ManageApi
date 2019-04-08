@@ -46,6 +46,7 @@ namespace Infrastructure.Redis.Inite
             //创建配置根对象
             var configurationRoot = builder.Build();
             WriteServerList = configurationRoot.GetSection("RedisIp").GetSection("WriteServerList").Value;
+            //WriteServerList = configurationRoot["RedisIp|WriteServerList"];
             ReadServerList = configurationRoot.GetSection("RedisIp").GetSection("ReadServerList").Value;
         }
     }
