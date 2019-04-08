@@ -2,10 +2,14 @@
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using MyEncrypt;
 using Newtonsoft.Json;
 using Service;
 using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ManageApi.Controllers
@@ -109,9 +113,10 @@ namespace ManageApi.Controllers
             {
                 return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = true, Message = "密码错误" });
             }
-            string token = rayPIToken.IssueJWT(user, new TimeSpan(0, 1, 0), new TimeSpan(1, 0, 0));
+            string token = rayPIToken.IssueJWT(user, new TimeSpan(1, 0, 0), new TimeSpan(1, 0, 0));
 
             return "Bearer" + token;
         }
+
     }
 }
