@@ -63,7 +63,7 @@ namespace Infrastructure.Redis.RedisServer
         public string Get(string key)
         {
             string value = base._iClient.GetValue(key);
-            base.Dispose();
+           // base.Dispose();
             return value;
         }
         /// <summary>
