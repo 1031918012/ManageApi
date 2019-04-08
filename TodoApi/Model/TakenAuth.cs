@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Infrastructure.Redis.RedisServer;
 
 namespace ManageApi
 {
@@ -16,13 +17,15 @@ namespace ManageApi
         /// http委托
         /// </summary>
         private readonly RequestDelegate _next;
+        private RedisStringService _redisStringService;
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="next"></param>
-        public TokenAuth(RequestDelegate next)
+        public TokenAuth(RequestDelegate next,RedisStringService redisStringService)
         {
             _next = next;
+            _redisStringService = redisStringService;
         }
         /// <summary>
         /// 验证授权
@@ -54,7 +57,8 @@ namespace ManageApi
                 {
                     var a = tokenStr.Remove(0, 6);
                     //验证缓存中是否存在该jwt字符串
-                    if (!RayPIMemoryCache.Exists(a))
+                    //if (!RayPIMemoryCache.Exists(tokenStr))
+                    if(string.IsNullOrEmpty(_redisStringService.Get(tokenStr)))
                     {
                         httpContext.Response.StatusCode = 301;
                         httpContext.Response.WriteAsync("登陆缓存验证字符串已经过期");

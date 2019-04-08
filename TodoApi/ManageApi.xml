@@ -318,11 +318,12 @@
             
             </summary>
         </member>
-        <member name="M:ManageApi.RayPIToken.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:ManageApi.RayPIToken.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Infrastructure.Redis.RedisServer.RedisStringService)">
             <summary>
             
             </summary>
             <param name="configuration"></param>
+            <param name="redisStringService"></param>
         </member>
         <member name="P:ManageApi.RayPIToken.Configuration">
             <summary>
@@ -348,7 +349,7 @@
             http委托
             </summary>
         </member>
-        <member name="M:ManageApi.TokenAuth.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+        <member name="M:ManageApi.TokenAuth.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Infrastructure.Redis.RedisServer.RedisStringService)">
             <summary>
             构造函数
             </summary>
