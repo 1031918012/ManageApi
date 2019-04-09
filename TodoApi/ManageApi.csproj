@@ -6,7 +6,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\Kai\source\repos\ManageApi3\TodoApi\ManageApi.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\ManageApi.xml</DocumentationFile>
+    <OutputPath>bin\Debug</OutputPath>
   </PropertyGroup>
 
   

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Repositories;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -45,7 +47,13 @@ namespace TodoApi
             services.AddMvc(o =>
             {
                 o.Filters.Add(typeof(CustomExceptionFilterAttribute));
-            });
+            }).AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                //设置时间格式
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+            }); ;
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
@@ -131,7 +139,7 @@ namespace TodoApi
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ManageApi");
                 c.SwaggerEndpoint("/swagger/SalaryCommon/swagger.json", "SalaryCommon");
             });
-            app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            app.UseCors("AllowAllOrigins");
             app.UseAuthentication();
             //app.UseMiddleware<TokenAuth>();
 
