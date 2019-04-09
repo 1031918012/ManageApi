@@ -31,7 +31,7 @@ namespace TodoApi
                 loggingBuilder.AddFilter("Microsoft", LogLevel.Warning);//过滤掉系统默认的一些日志
                 loggingBuilder.AddLog4Net();
             })
-                .Build();
+            .Build();
 
     }
 }

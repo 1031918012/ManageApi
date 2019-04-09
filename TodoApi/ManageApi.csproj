@@ -6,21 +6,21 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\ManageApi.xml</DocumentationFile>
-    <OutputPath>bin\Debug</OutputPath>
+    <DocumentationFile>C:\Users\Kai\Source\Repos\ManageApi3\TodoApi\ManageApi.xml</DocumentationFile>
+    <OutputPath></OutputPath>
   </PropertyGroup>
 
   
   
   <ItemGroup>
+    <Compile Remove="bin\**" />
     <Compile Remove="log\**" />
+    <Content Remove="bin\**" />
     <Content Remove="log\**" />
+    <EmbeddedResource Remove="bin\**" />
     <EmbeddedResource Remove="log\**" />
+    <None Remove="bin\**" />
     <None Remove="log\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="ManageApi.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,9 +57,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="log4net.Config">
+    <Content Update="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ManageApi.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
