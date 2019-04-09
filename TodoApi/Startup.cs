@@ -51,7 +51,12 @@ namespace TodoApi
                 options.AddPolicy("AllowAllOrigins",
                 builder =>
                 {
-                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    builder                    
+                    //.WithOrigins(Configuration.GetSection("Uri:FYUServer").Value, Configuration.GetSection("Uri:SalaryUI").Value)
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();//允许cookie 和 header
                     //允许所有来源，允许所有HTTP方法，允许所有作者的请求标头
                 });
             });
@@ -128,7 +133,7 @@ namespace TodoApi
             });
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseAuthentication();
-            app.UseMiddleware<TokenAuth>();
+            //app.UseMiddleware<TokenAuth>();
 
             app.UseMvc();
         }

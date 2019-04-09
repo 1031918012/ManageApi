@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Domain;
@@ -47,6 +48,20 @@ namespace Repositories
         void ISalaryUnitOfWork.AddRangeasyn<TManage>(List<TManage> manage)
         {
             _context.BulkInsertAsync(manage);
+        }
+        void ISalaryUnitOfWork.AddRangeasyn11(IQueryable<Manage> manage, Expression<Func<Manage, bool>> exception)
+        {
+            manage.BatchDelete();
+            //_context.BulkInsertAsync(manage);
+        }
+
+        void ISalaryUnitOfWork.UpdateRange<TManage>(List<TManage> manage)
+        {
+            _context.BulkUpdate(manage);
+        }
+        void ISalaryUnitOfWork.UpdateRangeasync<TManage>(List<TManage> manage)
+        {
+            _context.BulkUpdateAsync(manage);
         }
     }
 }

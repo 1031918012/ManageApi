@@ -225,6 +225,24 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:ManageApi.Controllers.PeopleController.UpdateOPeople(System.Collections.Generic.List{Domain.People})">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageApi.Controllers.PeopleController.UpdateOPeople2(System.Collections.Generic.List{Domain.People})">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManageApi.Controllers.PeopleController.GetPeoples">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ManageApi.Controllers.UserController">
             <summary>
             

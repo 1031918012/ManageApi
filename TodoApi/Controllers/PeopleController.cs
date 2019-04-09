@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Service;
 
 namespace ManageApi.Controllers
@@ -87,10 +88,11 @@ namespace ManageApi.Controllers
             DateTime now = DateTime.Now;
             _people.Addpeoplelist(list);
             return DateTime.Now - now;
-        } /// <summary>
-          /// 
-          /// </summary>
-          /// <returns></returns>
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("AddOPeople2")]
         public TimeSpan AddOPeople2()
         {
@@ -110,6 +112,33 @@ namespace ManageApi.Controllers
             DateTime now = DateTime.Now;
             _people.Addpeoplelistasyn(list);
             return DateTime.Now - now;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("UpdateOPeople")]
+        public bool UpdateOPeople(List<People> peoples)
+        {
+            return _people.UpdateEntity(peoples);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("UpdateOPeople2")]
+        public bool UpdateOPeople2(List<People> peoples)
+        {
+            return _people.UpdateEntityasync(peoples);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("GetPeoples")]
+        public string GetPeoples()
+        {
+            return JsonConvert.SerializeObject(_people.GetPeoples());
         }
     }
 }

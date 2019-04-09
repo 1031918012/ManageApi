@@ -38,7 +38,7 @@ namespace ManageApi
         {
             if (httpContext.Request.Path.HasValue)
             {
-                if (httpContext.Request.Path.Value.Contains("Login"))
+                if (httpContext.Request.Path.Value.Contains("User"))
                 {
                     return _next(httpContext);
                 }

@@ -1,6 +1,7 @@
 ﻿using Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -32,5 +33,11 @@ namespace Domain
         /// <param name="manage"></param>
         void Delete<TManage>(TManage manage) where TManage : class, IManage;
         void AddRange<TManage>(List<TManage> manage) where TManage : class, IManage;
+        void UpdateRange<TManage>(List<TManage> manage) where TManage : class, IManage;
+        void UpdateRangeasync<TManage>(List<TManage> manage)where TManage : class, IManage;
+
+
+
+        void AddRangeasyn11(IQueryable<Manage> manage, Expression<Func<Manage, bool>> exception);
     }
 }
