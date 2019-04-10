@@ -31,9 +31,9 @@ namespace Service
             return _salaryUnitOfWork.Commit();
         }
 
-        public List<People> GetPeoples()
+        public List<People> GetPeoples(string id)
         {
-            return _people.GetEntitieList(s => s.Name == "1").ToList();
+            return _people.GetEntitieList(s => id.Contains(s.PeopleID.ToString()) ).ToList();
         }
         public bool UpdateEntity(List<People> peoples)
         {

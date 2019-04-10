@@ -6,6 +6,7 @@ using System.Text;
 using Domain;
 using EFCore.BulkExtensions;
 using Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repositories
 {

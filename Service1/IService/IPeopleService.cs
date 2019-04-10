@@ -13,6 +13,6 @@ namespace Service
         bool Addpeoplelistasyn(List<People> peoples);
         bool UpdateEntityasync(List<People> peoples);
         bool UpdateEntity(List<People> peoples);
-        List<People> GetPeoples();
+        List<People> GetPeoples(string id);
     }
 }

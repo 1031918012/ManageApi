@@ -118,7 +118,7 @@ namespace ManageApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("UpdateOPeople")]
-        public bool UpdateOPeople(List<People> peoples)
+        public bool UpdateOPeople([FromBody]List<People> peoples)
         {
             return _people.UpdateEntity(peoples);
         }
@@ -136,9 +136,9 @@ namespace ManageApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("GetPeoples")]
-        public string GetPeoples()
+        public string GetPeoples(string id)
         {
-            return JsonConvert.SerializeObject(_people.GetPeoples());
+            return JsonConvert.SerializeObject(_people.GetPeoples(id));
         }
     }
 }
