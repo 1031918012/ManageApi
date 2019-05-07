@@ -1,8 +1,3 @@
-# ASP.NET Core
-# Build and test ASP.NET Core web applications targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/vsts/pipelines/languages/dotnet-core
-
 name: $(Date:yyyyMMdd)$(Rev:-r)
 pool:
   vmImage: 'Ubuntu 16.04'
@@ -24,11 +19,11 @@ steps:
     projects: '**/*.csproj'
     publishWebProjects: false
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
-    zipAfterPublish: false
+    zipAfterPublish: True
     modifyOutputPath: True
     includeNuGetOrg: True
 
 - task: PublishBuildArtifacts@1
   inputs:
-    artifactName: 'qa'
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/TodoAPI'
+    artifactName: 'Release'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
