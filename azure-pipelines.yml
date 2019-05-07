@@ -31,4 +31,4 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     artifactName: 'qa'
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/API'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/TodoAPI'
