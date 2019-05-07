@@ -3,7 +3,7 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/vsts/pipelines/languages/dotnet-core
 
-name: $(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+name: $(Date:yyyyMMdd)$(Rev:-r)
 pool:
   vmImage: 'Ubuntu 16.04'
 
@@ -24,13 +24,11 @@ steps:
     projects: '**/*.csproj'
     publishWebProjects: false
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
-    zipAfterPublish: True
+    zipAfterPublish: false
     modifyOutputPath: True
     includeNuGetOrg: True
 
 - task: PublishBuildArtifacts@1
   inputs:
-    artifactName: 'drop'
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    targetPath: '$(Build.ArtifactStagingDirectory)'
-    publishLocation: 'Container'
+    artifactName: 'qa'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/API'
