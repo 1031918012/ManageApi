@@ -36,7 +36,7 @@ namespace TodoApi
                     operation.Parameters.Add(new NonBodyParameter()
                     {
                         Name = "Claim",
-                        In = "query",//query header body path formData
+                        In = "header",//query header body path formData
                         Type = "apiKey",
                         Description = "请求客户端来源",
                     });

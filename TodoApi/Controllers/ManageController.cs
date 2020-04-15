@@ -13,9 +13,6 @@ using Microsoft.Net.Http.Headers;
 using System.Web;
 using System.Linq;
 using System.Data;
-using NPOI.SS.UserModel;
-using NPOI.HSSF.UserModel;
-using NPOI.XSSF.UserModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
@@ -186,6 +183,29 @@ namespace ManageApi.Controllers
                 return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = false, Message = "导入的数据格式有误!" });
             }
 
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Randam")]
+        public int[] Randamceshi()
+        {
+            List<int> time = new List<int>();
+            for (int i = 0; i < 10; i++)
+            {
+                time.Add(0);
+            }
+            Random r = new Random();
+            for (int i = 0; i < 100 * 10000; i++)
+            {
+                //int suijishu = r.Next(0, 9);
+                int suijishu = 0;
+                var copy = time;
+                copy.ToArray().Select(s => new { random = r.NextDouble(),value = s }).OrderBy(s=>s.random).Select(s=>s.value).ToArray();
+                time[suijishu]++;
+            }
+            return time.ToArray();
         }
     }
 }

@@ -46,7 +46,7 @@ namespace TodoApi
         {
             services.AddMvc(o =>
             {
-                o.Filters.Add(typeof(CustomExceptionFilterAttribute));
+                //o.Filters.Add(typeof(CustomExceptionFilterAttribute));
             }).AddJsonOptions(options =>
             {
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
@@ -70,6 +70,8 @@ namespace TodoApi
             });
             services.AddDbContextPool<ManageContext>(options =>
             {
+                options.UseLazyLoadingProxies();
+                //options.UseMySql(Configuration.GetConnectionString("ManageConnectionStrings"));
                 options.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"), b => b.MigrationsAssembly("Repositories"));
             });
             services.AddSwaggerGen(c =>

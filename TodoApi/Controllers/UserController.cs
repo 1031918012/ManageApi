@@ -50,22 +50,22 @@ namespace ManageApi.Controllers
         /// </summary>
         /// <param name="Uname">用户名</param>
         /// <param name="password">密码</param>
-        /// <param name="Icon">头像</param>
         /// <param name="UNickname">昵称</param>
         /// <param name="phone">电话</param>
         /// <param name="Sub">角色</param>
         /// <param name="imageCheck">图片验证码</param>
         /// <returns></returns>
         [HttpPost("AddUser")]
-        public string AddUser(string Uname, string password, string phone, string Icon, string UNickname, string Sub, string imageCheck)
+        public string AddUser(string Uname, string password, string phone, string UNickname, string Sub, string imageCheck)
         {
+
             if (Regex.IsMatch(phone, Configuration["Regex:Phone"]))
             {
                 return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = false, Message = "请输入正确的手机号" });
             }
             if (_userService.GetUserRepeName(Uname))//判断重名
             {
-                return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = false, Message = "用户名重复" });
+                return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = false, Message = "用户名重复" });  
             }
             if (_userService.GetUserRepePhone(phone))//一个手机号只能绑定一个用户
             {
@@ -76,10 +76,14 @@ namespace ManageApi.Controllers
                 ID = new Guid(),
                 Password = MD5Encrypt.Encrypt(password),//加密
                 Phone = phone,
-                Sub = Sub,
+                Sub = "",
                 Uname = Uname,
                 UNickname = UNickname
             };
+            if (!string.IsNullOrEmpty(Sub))
+            {
+                a.Sub = Sub;
+            }
             var result = _userService.AddUser(a);
             if (!result)
             {
@@ -114,7 +118,6 @@ namespace ManageApi.Controllers
                 return JsonConvert.SerializeObject(new JsonResponse { IsSuccess = true, Message = "密码错误" });
             }
             string token = rayPIToken.IssueJWT(user, new TimeSpan(1, 0, 0), new TimeSpan(1, 0, 0));
-
             return "Bearer" + token;
         }
 
