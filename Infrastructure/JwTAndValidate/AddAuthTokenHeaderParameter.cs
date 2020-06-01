@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Generic;
@@ -17,11 +18,11 @@ namespace TodoApi
         /// </summary>
         /// <param name="operation"></param>
         /// <param name="context"></param>
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             if (operation.Parameters == null)
             {
-                operation.Parameters = new List<IParameter>();
+                operation.Parameters = new List<OpenApiParameter>();
             }
             var attrs = context.ApiDescription.ActionDescriptor.AttributeRouteInfo;
 
@@ -33,11 +34,10 @@ namespace TodoApi
                 //非匿名的方法,链接中添加accesstoken值
                 if (!isAnonymous)
                 {
-                    operation.Parameters.Add(new NonBodyParameter()
+                    operation.Parameters.Add(new OpenApiParameter()
                     {
                         Name = "Claim",
-                        In = "header",//query header body path formData
-                        Type = "apiKey",
+                        In =  ParameterLocation.Cookie,//query header body path formData
                         Description = "请求客户端来源",
                     });
                 }

@@ -11,13 +11,13 @@ namespace Repositories
     {
         public void Configure(EntityTypeBuilder<WorkPaidLeave> builder)
         {
-            builder.ToTable("WorkPaidLeave");
-            builder.HasKey(t => t.WorkPaidLeaveID);
-            builder.Property(t => t.WorkPaidLeaveID).IsRequired().HasColumnName("ID").HasMaxLength(36);
-            builder.Property(t => t.PaidLeaveTime).IsRequired().HasColumnType("datetime");
-            builder.Property(t => t.Type).IsRequired();
-            builder.Property(t => t.HolidayID).IsRequired().HasMaxLength(36);
-            builder.Property(t => t.HolidayName).IsRequired().HasMaxLength(50);
+            //builder.ToTable("WorkPaidLeave");
+            //builder.HasKey(t => t.WorkPaidLeaveID);
+            //builder.Property(t => t.WorkPaidLeaveID).IsRequired().HasColumnName("ID").HasMaxLength(36);
+            //builder.Property(t => t.PaidLeaveTime).IsRequired().HasColumnType("datetime");
+            //builder.Property(t => t.Type).IsRequired();
+            //builder.Property(t => t.HolidayID).IsRequired().HasMaxLength(36);
+            //builder.Property(t => t.HolidayName).IsRequired().HasMaxLength(50);
         }
     }
 }
