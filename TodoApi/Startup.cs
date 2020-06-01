@@ -1,5 +1,4 @@
-﻿using Infrastructure.Filter;
-using ManageApi;
+﻿using ManageApi;
 using ManageApi.DependenciesInit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Repositories;
@@ -59,7 +59,7 @@ namespace TodoApi
                 options.AddPolicy("AllowAllOrigins",
                 builder =>
                 {
-                    builder                    
+                    builder
                     //.WithOrigins(Configuration.GetSection("Uri:FYUServer").Value, Configuration.GetSection("Uri:SalaryUI").Value)
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
@@ -68,16 +68,16 @@ namespace TodoApi
                     //允许所有来源，允许所有HTTP方法，允许所有作者的请求标头
                 });
             });
-            services.AddDbContextPool<ManageContext>(options =>
+            services.AddDbContextPool<DBContextBase>(options =>
             {
                 options.UseLazyLoadingProxies();
-                //options.UseMySql(Configuration.GetConnectionString("ManageConnectionStrings"));
-                options.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"), b => b.MigrationsAssembly("Repositories"));
+                options.UseMySql(Configuration.GetConnectionString("ManageConnectionStrings"));
+                //options.UseSqlServer(Configuration.GetConnectionString("ManageConnectionStrings"), b => b.MigrationsAssembly("Repositories"));
             });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "ManageApi", Version = "v1" });
-                c.SwaggerDoc("SalaryCommon", new Info { Title = "SalaryCommon", Version = "SalaryCommon" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ManageApi", Version = "v1" });
+                c.SwaggerDoc("SalaryCommon", new OpenApiInfo { Title = "SalaryCommon", Version = "SalaryCommon" });
                 c.DocInclusionPredicate((docName, apiDesc) =>
                 {
                     if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo))
@@ -96,15 +96,16 @@ namespace TodoApi
                 //var xmlDomainPath = Path.Combine(basePath, "Domain.xml");
                 c.IncludeXmlComments(xmlControllPath);
                 //c.IncludeXmlComments(xmlDomainPath);
-                //c.OperationFilter<AddAuthTokenHeaderParameter>();
-                var security = new Dictionary<string, IEnumerable<string>> { { "Bearer", new string[] { } }, };
-                c.AddSecurityRequirement(security);//添加一个必须的全局安全信息，和AddSecurityDefinition方法指定的方案名称要一致，这里是Bearer。
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                c.OperationFilter<AddAuthTokenHeaderParameter>();
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                });//添加一个必须的全局安全信息，和AddSecurityDefinition方法指定的方案名称要一致，这里是Bearer。
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT授权(数据将在请求头中进行传输) 参数结构: \"Authorization: Bearer {token}\"",
                     Name = "Authorization",//jwt默认的参数名称
-                    In = "header",//jwt默认存放Authorization信息的位置(请求头中)
-                    Type = "apiKey"
+                    In = ParameterLocation.Cookie,//jwt默认存放Authorization信息的位置(请求头中)
+                    Type = SecuritySchemeType.ApiKey
                 });
             });
             services.AddAuthorization(options =>
@@ -134,7 +135,6 @@ namespace TodoApi
                 app.UseHsts();
             }
             app.UseStaticFiles();
-            //app.UseSession();
             app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
             app.UseSwaggerUI(c =>
             {
@@ -143,8 +143,6 @@ namespace TodoApi
             });
             app.UseCors("AllowAllOrigins");
             app.UseAuthentication();
-            //app.UseMiddleware<TokenAuth>();
-
             app.UseMvc();
         }
     }

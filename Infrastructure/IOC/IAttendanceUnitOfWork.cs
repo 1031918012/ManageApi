@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure
 {
-    public interface IUnitOfWork
+    public interface IAttendanceUnitOfWork
     {
         bool Commit();
     }

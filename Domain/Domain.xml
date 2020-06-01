@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Domain</name>
+    </assembly>
+    <members>
+        <member name="T:Domain.AggregateRoot">
+            <summary>
+            聚合根抽象类
+            </summary>
+        </member>
+        <member name="T:Domain.IAggregateRoot">
+            <summary>
+            聚合根接口
+            </summary>
+        </member>
+        <member name="T:Domain.IEntity">
+            <summary>
+            泛型约束，表示继承接口为领域实体
+            </summary>
+        </member>
+        <member name="T:Domain.IRepository`1">
+            <summary>
+            聚合查询
+            </summary>
+            <typeparam name="TAggregateRoot"></typeparam>
+        </member>
+        <member name="M:Domain.IRepository`1.GetEntity(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            查询实体集合
+            </summary>
+            <param name="exp">查询条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:Domain.IRepository`1.GetEntityList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},Infrastructure.SortOrderEnum)">
+            <summary>
+             查询聚合跟集合
+            </summary>
+            <param name="exp">查询条件</param>
+            <param name="order">排序字段</param>
+            <param name="sortOrder">排序条件</param>
+            <returns>集合</returns>
+        </member>
+        <member name="M:Domain.IRepository`1.GetByPage(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},Infrastructure.SortOrderEnum)">
+            <summary>
+            分页查询
+            单条件排序
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页显示条数</param>
+            <param name="exp">查询条件</param>
+            <param name="order">排序字段</param>
+            <param name="sortOrder">排序规则</param>
+            <returns></returns>
+        </member>
+        <member name="M:Domain.IRepository`1.GetByPage(System.Int32,System.Int32,System.Linq.IQueryable{`0},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}},Infrastructure.SortOrderEnum)">
+            <summary>
+            分页查询
+            单条件排序
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页显示条数</param>
+            <param name="query"></param>
+            <param name="exp">查询条件</param>
+            <param name="order">排序字段</param>
+            <param name="sortOrder">排序规则</param>
+            <returns></returns>
+        </member>
+        <member name="M:Domain.IRepository`1.GetByPage(System.Int32,System.Int32,System.Linq.IQueryable{`0},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Collections.Generic.Dictionary{System.Linq.Expressions.Expression{System.Func{`0,System.Object}},Infrastructure.SortOrderEnum})">
+            <summary>
+            分页查询
+            多条件排序
+            </summary>
+            <param name="pageIndex">页面</param>
+            <param name="pageSize">每页显示条数</param>
+            <param name="query"></param>
+            <param name="exp">查询条件</param>
+            <param name="order">排序字典(Key:排序字段  Value:排序规则)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Domain.IRepository`1.EntityQueryable``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="exp"></param>
+            <param name="isNoTracking"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Domain.IRepository`1.GetByPage``1(System.Int32,System.Int32,System.Linq.IQueryable{``0})">
+            <summary>
+            双查询分页(节约性能)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Domain.IWorkPaidLeaveRepository">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Domain.WorkPaidLeave">
+            <summary>
+            调休上班
+            </summary>
+        </member>
+    </members>
+</doc>
