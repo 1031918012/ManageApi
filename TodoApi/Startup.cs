@@ -96,7 +96,7 @@ namespace TodoApi
                 //var xmlDomainPath = Path.Combine(basePath, "Domain.xml");
                 c.IncludeXmlComments(xmlControllPath);
                 //c.IncludeXmlComments(xmlDomainPath);
-                c.OperationFilter<AddAuthTokenHeaderParameter>();
+                //c.OperationFilter<AddAuthTokenHeaderParameter>();
                 var security = new Dictionary<string, IEnumerable<string>> { { "Bearer", new string[] { } }, };
                 c.AddSecurityRequirement(security);//添加一个必须的全局安全信息，和AddSecurityDefinition方法指定的方案名称要一致，这里是Bearer。
                 c.AddSecurityDefinition("Bearer", new ApiKeyScheme
