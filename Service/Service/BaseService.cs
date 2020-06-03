@@ -9,12 +9,10 @@ namespace Service
     {
         public readonly IMapper _mapper;
         public readonly IAttendanceUnitOfWork _attendanceUnitOfWork;
-        public readonly ISerializer<string> _serializer;
-        public BaseService(IAttendanceUnitOfWork attendanceUnitOfWork, IMapper mapper, ISerializer<string> serializer)
+        public BaseService(IAttendanceUnitOfWork attendanceUnitOfWork, IMapper mapper)
         {
             _attendanceUnitOfWork = attendanceUnitOfWork;
             _mapper = mapper;
-            _serializer = serializer;
         }
         public PageResult<TDestination> PageMap<TDestination, TSource>(PageResult<TSource> a)
         {

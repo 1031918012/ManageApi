@@ -7,7 +7,7 @@ namespace Domain
     /// <summary>
     /// 
     /// </summary>
-    public interface IWorkPaidLeaveRepository : IRepository<WorkPaidLeave>
+    public interface IAttendanceGroupRepository : IRepository<AttendanceGroup>
     {
     }
 }

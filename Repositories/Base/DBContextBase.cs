@@ -14,11 +14,11 @@ namespace Repositories
         {
         }
 
-        public DbSet<WorkPaidLeave> WorkPaidLeaveList { get; set; }
+        public DbSet<AttendanceGroup> WorkPaidLeaveList { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new WorkPaidLeaveMap());
+            modelBuilder.ApplyConfiguration(new AttendanceGroupMap());
             base.OnModelCreating(modelBuilder);
         }
     }

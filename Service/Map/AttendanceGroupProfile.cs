@@ -4,9 +4,9 @@ using Infrastructure;
 
 namespace Service
 {
-    public class WorkPaidLeaveProfile : Profile
+    public class AttendanceGroupProfile : Profile
     {
-        public WorkPaidLeaveProfile()
+        public AttendanceGroupProfile()
         {
             //CreateMap<WorkPaidLeave, WorkPaidLeaveDTO>()
             //    .ForMember(s => s.WorkPaidLeaveID, opt => opt.MapFrom(s => s.WorkPaidLeaveID))

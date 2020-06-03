@@ -19,6 +19,11 @@
             泛型约束，表示继承接口为领域实体
             </summary>
         </member>
+        <member name="T:Domain.IAttendanceGroupRepository">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Domain.IRepository`1">
             <summary>
             聚合查询
@@ -97,14 +102,19 @@
             <param name="query"></param>
             <returns></returns>
         </member>
-        <member name="T:Domain.IWorkPaidLeaveRepository">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Domain.WorkPaidLeave">
+        <member name="T:Domain.AttendanceGroup">
             <summary>
             调休上班
+            </summary>
+        </member>
+        <member name="P:Domain.AttendanceGroup.AttendanceGroupId">
+            <summary>
+            考勤组id
+            </summary>
+        </member>
+        <member name="P:Domain.AttendanceGroup.Name">
+            <summary>
+            考勤组名称
             </summary>
         </member>
     </members>

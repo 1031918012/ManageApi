@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Repositories;
+using Service;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
@@ -115,6 +116,7 @@ namespace TodoApi
                 options.AddPolicy("Admin", policy => policy.RequireClaim("Admin").Build());
             });
             #region autofac
+            services.AddAutoMapperAssembly();
             return AotufacInite.ConvertToAutofac(services);
             #endregion
         }
