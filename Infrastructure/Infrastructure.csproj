@@ -14,6 +14,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="2.2.10" />
     <PackageReference Include="NPOI" Version="2.5.1" />
+    <PackageReference Include="RabbitMQ.Client" Version="5.2.0" />
     <PackageReference Include="ServiceStack" Version="5.5.0" />
     <PackageReference Include="ServiceStack.Redis" Version="5.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.4.1" />
@@ -23,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="CommonModel\" />
+    <Folder Include="RabbitMq\" />
   </ItemGroup>
 
   <ItemGroup>
