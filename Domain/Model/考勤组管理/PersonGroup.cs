@@ -28,6 +28,10 @@ namespace Domain
         /// <summary>
         /// 所属客户编号
         /// </summary>
-        public string CompanyId { get; set; }
+        public string CustomerId { get; set; }
+        /// <summary>
+        /// 所属客户名称
+        /// </summary>
+        public string CustomerName { get; set; }
     }
 }

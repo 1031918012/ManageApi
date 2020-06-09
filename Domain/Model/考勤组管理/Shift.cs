@@ -45,5 +45,9 @@ namespace Domain
         /// 晚到晚走
         /// </summary>
         public int LateFlexible { get; set; }
+        /// <summary>
+        /// 客户id
+        /// </summary>
+        public string CustomerId { get; set; }
     }
 }

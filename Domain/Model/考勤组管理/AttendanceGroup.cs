@@ -54,6 +54,10 @@ namespace Domain
         /// 是否开启Wifi
         /// </summary>
         public bool IsWifi { get; set; }
+        /// <summary>
+        /// 所属客户编号
+        /// </summary>
+        public string CustomerId { get; set; }
     }
 
 

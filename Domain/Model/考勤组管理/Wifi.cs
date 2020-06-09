@@ -16,10 +16,15 @@ namespace Domain
         /// <summary>
         /// 考勤组id
         /// </summary>
+        public int AttendanceGroupId { get; set; }
+        /// <summary>
+        /// Wifi名称
+        /// </summary>
         public int WifiName { get; set; }
         /// <summary>
         /// Mac地址
         /// </summary>
         public string Mac { get; set; }
+
     }
 }

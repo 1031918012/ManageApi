@@ -14,10 +14,6 @@ namespace Domain
         /// </summary>
         public int SetingDaytableId { get; set; }
         /// <summary>
-        /// 人员名称
-        /// </summary>
-        public string Name { get; set; }
-        /// <summary>
         /// 人员唯一编号
         /// </summary>
         public string IdCard { get; set; }
@@ -32,7 +28,11 @@ namespace Domain
         /// <summary>
         /// 所属客户编号
         /// </summary>
-        public string CompanyId { get; set; }
+        public string CustomerId { get; set; }
+        /// <summary>
+        /// 所属客户名称
+        /// </summary>
+        public string CustomerName { get; set; }
         /// <summary>
         /// 班次名称
         /// </summary>

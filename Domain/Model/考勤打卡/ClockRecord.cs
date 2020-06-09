@@ -38,11 +38,11 @@ namespace Domain
         /// </summary>
         public string Longitude { get; set; }
         /// <summary>
-        /// 打卡类型 内勤外勤 补卡
+        /// 打卡类型 内勤 外勤 补卡 
         /// </summary>
         public string ClockType { get; set; }
         /// <summary>
-        /// 打卡结果  迟到早退
+        /// 打卡结果 正常 迟到 早退
         /// </summary>
         public string Result { get; set; }
         /// <summary>

@@ -14,13 +14,13 @@ namespace Domain
         /// </summary>
         public int SchedulingId { get; set; }
         /// <summary>
-        /// 排班id
+        /// 人员唯一编号
         /// </summary>
         public string IdCard { get; set; }
         /// <summary>
         /// 时间
         /// </summary>
-        public string Time { get; set; }
+        public DateTime Time { get; set; }
         /// <summary>
         /// 班次id
         /// </summary>
