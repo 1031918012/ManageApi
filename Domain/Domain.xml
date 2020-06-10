@@ -102,6 +102,266 @@
             <param name="query"></param>
             <returns></returns>
         </member>
+        <member name="T:Domain.ClockRecord">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Domain.ClockRecord.ClockRecordId">
+            <summary>
+            打卡记录id
+            </summary>
+        </member>
+        <member name="P:Domain.ClockRecord.IdCard">
+            <summary>
+            人员唯一编号
+            </summary>
+        </member>
+        <member name="P:Domain.ClockRecord.AttendanceDate">
+            <summary>
+            考勤日期
+            </summary>
+        </member>
+        <member name="P:Domain.ClockRecord.ShiftTime">
+            <summary>
+            打卡时间
+            </summary>
+        </member>
+        <member name="P:Domain.ClockRecord.ClockTime">
+            <summary>
+            打卡时间
+            </summary>
+        </member>
+        <member name="P:Domain.ClockRecord.Address">
+            <summary>
+            打卡地址
+            </summary>
+        </member>
+        <member name="P:Domain.ClockRecord.Latitude">
+            <summary>
+            打卡精度
+            </summary>
+        </member>
+        <member name="P:Domain.ClockRecord.Longitude">
+            <summary>
+            打卡纬度
+            </summary>
+        </member>
+        <member name="P:Domain.ClockRecord.ClockType">
+            <summary>
+            打卡类型 内勤 外勤 补卡 
+            </summary>
+        </member>
+        <member name="P:Domain.ClockRecord.Result">
+            <summary>
+            打卡结果 正常 迟到 早退
+            </summary>
+        </member>
+        <member name="P:Domain.ClockRecord.ImageUrl">
+            <summary>
+            打卡图片地址
+            </summary>
+        </member>
+        <member name="P:Domain.ClockRecord.Remark">
+            <summary>
+            打卡备注
+            </summary>
+        </member>
+        <member name="T:Domain.ClockStatistics">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.ClockStatisticsId">
+            <summary>
+            节假日管理
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.IdCard">
+            <summary>
+            人员唯一编号
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.SettingTime">
+            <summary>
+            设置的时间
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.FirstInClockId">
+            <summary>
+            打卡id
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.FirstOutClockId">
+            <summary>
+            设置的时间
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.SecondInClockId">
+            <summary>
+            打卡id
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.SecondOutClockId">
+            <summary>
+            设置的时间
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.ThirdInClockId">
+            <summary>
+            打卡id
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.ThirdOutClockId">
+            <summary>
+            设置的时间
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.LateTime">
+            <summary>
+            迟到次数
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.LateMinutes">
+            <summary>
+            迟到时间
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.EarlyLeaveTimes">
+            <summary>
+            早退次数
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.EarlyLeaveMinutes">
+            <summary>
+            早退时间
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.WorkTime">
+            <summary>
+            工作时长
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.NotClockInTimes">
+            <summary>
+            上班缺卡次数
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.NotClockOutTimes">
+            <summary>
+            下班缺卡次数
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.WorkingOvertime">
+            <summary>
+            工作日加班时长
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.RestOvertime">
+            <summary>
+            休息日加班时长
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.HolidayOvertime">
+            <summary>
+            节假日加班时长
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.AllOvertime">
+            <summary>
+            加班总时长
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.Travel">
+            <summary>
+            出差时长
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.GoOut">
+            <summary>
+            外出时长
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.Leave">
+            <summary>
+            请假时长
+            </summary>
+        </member>
+        <member name="T:Domain.SetingDaytable">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Domain.SetingDaytable.SetingDaytableId">
+            <summary>
+            人员考勤组关系ID
+            </summary>
+        </member>
+        <member name="P:Domain.SetingDaytable.IdCard">
+            <summary>
+            人员唯一编号
+            </summary>
+        </member>
+        <member name="P:Domain.SetingDaytable.SettingTime">
+            <summary>
+            设置的时间
+            </summary>
+        </member>
+        <member name="P:Domain.SetingDaytable.AttendanceGroupId">
+            <summary>
+            关联的考勤组
+            </summary>
+        </member>
+        <member name="P:Domain.SetingDaytable.CustomerId">
+            <summary>
+            所属客户编号
+            </summary>
+        </member>
+        <member name="P:Domain.SetingDaytable.CustomerName">
+            <summary>
+            所属客户名称
+            </summary>
+        </member>
+        <member name="P:Domain.SetingDaytable.ShiftName">
+            <summary>
+            班次名称
+            </summary>
+        </member>
+        <member name="P:Domain.SetingDaytable.ShiftDetails">
+            <summary>
+            打卡时段
+            </summary>
+        </member>
+        <member name="P:Domain.SetingDaytable.IsExemption">
+            <summary>
+            是否存在豁免时间(定义：迟到多少分钟不算，早退多少分钟不算)
+            </summary>
+        </member>
+        <member name="P:Domain.SetingDaytable.LateMinutes">
+            <summary>
+            豁免迟到分钟数
+            </summary>
+        </member>
+        <member name="P:Domain.SetingDaytable.EarlyLeaveMinutes">
+            <summary>
+            豁免早退分钟数
+            </summary>
+        </member>
+        <member name="P:Domain.SetingDaytable.IsFlexible">
+            <summary>
+            是否存在弹性时间
+            </summary>
+        </member>
+        <member name="P:Domain.SetingDaytable.EarlyFlexible">
+            <summary>
+            早到早走
+            </summary>
+        </member>
+        <member name="P:Domain.SetingDaytable.LateFlexible">
+            <summary>
+            晚到晚走
+            </summary>
+        </member>
         <member name="T:Domain.Address">
             <summary>
             
@@ -197,6 +457,11 @@
             是否开启Wifi
             </summary>
         </member>
+        <member name="P:Domain.AttendanceGroup.CustomerId">
+            <summary>
+            所属客户编号
+            </summary>
+        </member>
         <member name="T:Domain.AttendanceTypeEnum">
             <summary>
             考勤类型
@@ -242,9 +507,14 @@
             关联的考勤组
             </summary>
         </member>
-        <member name="P:Domain.PersonGroup.CompanyId">
+        <member name="P:Domain.PersonGroup.CustomerId">
             <summary>
             所属客户编号
+            </summary>
+        </member>
+        <member name="P:Domain.PersonGroup.CustomerName">
+            <summary>
+            所属客户名称
             </summary>
         </member>
         <member name="T:Domain.Scheduling">
@@ -259,7 +529,7 @@
         </member>
         <member name="P:Domain.Scheduling.IdCard">
             <summary>
-            排班id
+            人员唯一编号
             </summary>
         </member>
         <member name="P:Domain.Scheduling.Time">
@@ -270,41 +540,6 @@
         <member name="P:Domain.Scheduling.ShiftId">
             <summary>
             班次id
-            </summary>
-        </member>
-        <member name="T:Domain.SetingDaytable">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Domain.SetingDaytable.SetingDaytableId">
-            <summary>
-            人员考勤组关系ID
-            </summary>
-        </member>
-        <member name="P:Domain.SetingDaytable.Name">
-            <summary>
-            人员名称
-            </summary>
-        </member>
-        <member name="P:Domain.SetingDaytable.IdCard">
-            <summary>
-            人员唯一编号
-            </summary>
-        </member>
-        <member name="P:Domain.SetingDaytable.SettingTime">
-            <summary>
-            设置的时间
-            </summary>
-        </member>
-        <member name="P:Domain.SetingDaytable.AttendanceGroupId">
-            <summary>
-            关联的考勤组
-            </summary>
-        </member>
-        <member name="P:Domain.SetingDaytable.CompanyId">
-            <summary>
-            所属客户编号
             </summary>
         </member>
         <member name="T:Domain.Shift">
@@ -355,6 +590,11 @@
         <member name="P:Domain.Shift.LateFlexible">
             <summary>
             晚到晚走
+            </summary>
+        </member>
+        <member name="P:Domain.Shift.CustomerId">
+            <summary>
+            客户id
             </summary>
         </member>
         <member name="T:Domain.ShiftDetail">
@@ -432,14 +672,49 @@
             考勤地址id
             </summary>
         </member>
-        <member name="P:Domain.Wifi.WifiName">
+        <member name="P:Domain.Wifi.AttendanceGroupId">
             <summary>
             考勤组id
+            </summary>
+        </member>
+        <member name="P:Domain.Wifi.WifiName">
+            <summary>
+            Wifi名称
             </summary>
         </member>
         <member name="P:Domain.Wifi.Mac">
             <summary>
             Mac地址
+            </summary>
+        </member>
+        <member name="T:Domain.HolidayManagement">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Domain.HolidayManagement.HolidayManagementId">
+            <summary>
+            节假日管理
+            </summary>
+        </member>
+        <member name="P:Domain.HolidayManagement.HolidayManagementName">
+            <summary>
+            节假日Name
+            </summary>
+        </member>
+        <member name="P:Domain.HolidayManagement.StartTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:Domain.HolidayManagement.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:Domain.HolidayManagement.Balance">
+            <summary>
+            调休上班日期
             </summary>
         </member>
     </members>

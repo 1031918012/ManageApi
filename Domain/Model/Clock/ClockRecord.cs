@@ -24,6 +24,10 @@ namespace Domain
         /// <summary>
         /// 打卡时间
         /// </summary>
+        public DateTime ShiftTime { get; set; }
+        /// <summary>
+        /// 打卡时间
+        /// </summary>
         public DateTime ClockTime { get; set; }
         /// <summary>
         /// 打卡地址
