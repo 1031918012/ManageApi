@@ -23,37 +23,13 @@ namespace Domain
         /// </summary>
         public DateTime SettingTime { get; set; }
         /// <summary>
-        /// 打卡id
-        /// </summary>
-        public int FirstInClockId { get; set; }
-        /// <summary>
-        /// 设置的时间
-        /// </summary>
-        public int FirstOutClockId { get; set; }
-        /// <summary>
-        /// 打卡id
-        /// </summary>
-        public int SecondInClockId { get; set; }
-        /// <summary>
-        /// 设置的时间
-        /// </summary>
-        public int SecondOutClockId { get; set; }
-        /// <summary>
-        /// 打卡id
-        /// </summary>
-        public int ThirdInClockId { get; set; }
-        /// <summary>
-        /// 设置的时间
-        /// </summary>
-        public int ThirdOutClockId { get; set; }
-        /// <summary>
         /// 迟到次数
         /// </summary>
         public int LateTime { get; set; }
         /// <summary>
         /// 迟到时间
         /// </summary>
-        public TimeSpan LateMinutes { get; set; }
+        public long LateMinutes { get; set; }
         /// <summary>
         /// 早退次数
         /// </summary>
@@ -61,11 +37,11 @@ namespace Domain
         /// <summary>
         /// 早退时间
         /// </summary>
-        public TimeSpan EarlyLeaveMinutes { get; set; }
+        public long EarlyLeaveMinutes { get; set; }
         /// <summary>
         /// 工作时长
         /// </summary>
-        public TimeSpan WorkTime { get; set; }
+        public long WorkTime { get; set; }
         /// <summary>
         /// 上班缺卡次数
         /// </summary>
@@ -77,30 +53,30 @@ namespace Domain
         /// <summary>
         /// 工作日加班时长
         /// </summary>
-        public TimeSpan WorkingOvertime { get; set; }
+        public long WorkingOvertime { get; set; }
         /// <summary>
         /// 休息日加班时长
         /// </summary>
-        public TimeSpan RestOvertime { get; set; }
+        public long RestOvertime { get; set; }
         /// <summary>
         /// 节假日加班时长
         /// </summary>
-        public TimeSpan HolidayOvertime { get; set; }
+        public long HolidayOvertime { get; set; }
         /// <summary>
         /// 加班总时长
         /// </summary>
-        public TimeSpan AllOvertime { get; set; }
+        public long AllOvertime { get; set; }
         /// <summary>
         /// 出差时长
         /// </summary>
-        public TimeSpan Travel { get; set; }
+        public long Travel { get; set; }
         /// <summary>
         /// 外出时长
         /// </summary>
-        public TimeSpan GoOut { get; set; }
+        public long GoOut { get; set; }
         /// <summary>
         /// 请假时长
         /// </summary>
-        public TimeSpan Leave { get; set; }
+        public long Leave { get; set; }
     }
 }

@@ -20,11 +20,11 @@ namespace Domain
         /// <summary>
         /// 上班时间
         /// </summary>
-        public TimeSpan StartWorkTime { get; set; }
+        public long StartWorkTime { get; set; }
         /// <summary>
         /// 下班时间
         /// </summary>
-        public TimeSpan EndWorkTime { get; set; }
+        public long EndWorkTime { get; set; }
         /// <summary>
         /// 是否开启休息时间
         /// </summary>
@@ -32,11 +32,11 @@ namespace Domain
         /// <summary>
         /// 开始休息时间
         /// </summary>
-        public TimeSpan StartRestTime { get; set; }
+        public long StartRestTime { get; set; }
         /// <summary>
         /// 结束休息时间
         /// </summary>
-        public TimeSpan EndRestTime { get; set; }
+        public long EndRestTime { get; set; }
         /// <summary>
         /// 是否开启打卡时段
         /// </summary>
@@ -44,18 +44,18 @@ namespace Domain
         /// <summary>
         /// 上班打卡时段始
         /// </summary>
-        public TimeSpan UpStartClockTime { get; set; }
+        public long UpStartClockTime { get; set; }
         /// <summary>
         /// 上班打卡时段末
         /// </summary>
-        public TimeSpan UpEndClockTime { get; set; }
+        public long UpEndClockTime { get; set; }
         /// <summary>
         /// 下班打卡时段始
         /// </summary>
-        public TimeSpan DownStartClockTime { get; set; }
+        public long DownStartClockTime { get; set; }
         /// <summary>
         /// 下班打卡时段末
         /// </summary>
-        public TimeSpan DownEndClockTime { get; set; }
+        public long DownEndClockTime { get; set; }
     }
 }

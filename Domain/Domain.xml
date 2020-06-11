@@ -124,7 +124,7 @@
         </member>
         <member name="P:Domain.ClockRecord.ShiftTime">
             <summary>
-            打卡时间
+            班次时间
             </summary>
         </member>
         <member name="P:Domain.ClockRecord.ClockTime">
@@ -167,6 +167,56 @@
             打卡备注
             </summary>
         </member>
+        <member name="T:Domain.ClockTypeEnum">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Domain.ClockTypeEnum.Inside">
+            <summary>
+            内勤
+            </summary>
+        </member>
+        <member name="F:Domain.ClockTypeEnum.Outside">
+            <summary>
+            外勤
+            </summary>
+        </member>
+        <member name="F:Domain.ClockTypeEnum.Supplement">
+            <summary>
+            补卡
+            </summary>
+        </member>
+        <member name="F:Domain.ClockTypeEnum.SpecialInside">
+            <summary>
+            拍照内勤
+            </summary>
+        </member>
+        <member name="F:Domain.ClockTypeEnum.SpecialOutside">
+            <summary>
+            拍照外勤
+            </summary>
+        </member>
+        <member name="T:Domain.ClockResultEnum">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Domain.ClockResultEnum.Normal">
+            <summary>
+            正常
+            </summary>
+        </member>
+        <member name="F:Domain.ClockResultEnum.Late">
+            <summary>
+            迟到
+            </summary>
+        </member>
+        <member name="F:Domain.ClockResultEnum.EarlyLeave">
+            <summary>
+            早退
+            </summary>
+        </member>
         <member name="T:Domain.ClockStatistics">
             <summary>
             
@@ -183,36 +233,6 @@
             </summary>
         </member>
         <member name="P:Domain.ClockStatistics.SettingTime">
-            <summary>
-            设置的时间
-            </summary>
-        </member>
-        <member name="P:Domain.ClockStatistics.FirstInClockId">
-            <summary>
-            打卡id
-            </summary>
-        </member>
-        <member name="P:Domain.ClockStatistics.FirstOutClockId">
-            <summary>
-            设置的时间
-            </summary>
-        </member>
-        <member name="P:Domain.ClockStatistics.SecondInClockId">
-            <summary>
-            打卡id
-            </summary>
-        </member>
-        <member name="P:Domain.ClockStatistics.SecondOutClockId">
-            <summary>
-            设置的时间
-            </summary>
-        </member>
-        <member name="P:Domain.ClockStatistics.ThirdInClockId">
-            <summary>
-            打卡id
-            </summary>
-        </member>
-        <member name="P:Domain.ClockStatistics.ThirdOutClockId">
             <summary>
             设置的时间
             </summary>
