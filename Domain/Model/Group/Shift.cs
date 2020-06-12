@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Domain
@@ -20,6 +21,7 @@ namespace Domain
         /// <summary>
         /// 打卡时段
         /// </summary>
+        [NotMapped]
         public virtual ICollection<ShiftDetail> ShiftDetails { get; set; }
         /// <summary>
         /// 是否存在豁免时间(定义：迟到多少分钟不算，早退多少分钟不算)

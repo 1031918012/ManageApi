@@ -224,7 +224,7 @@
         </member>
         <member name="P:Domain.ClockStatistics.ClockStatisticsId">
             <summary>
-            节假日管理
+            打卡统计主键
             </summary>
         </member>
         <member name="P:Domain.ClockStatistics.IdCard">
@@ -235,6 +235,11 @@
         <member name="P:Domain.ClockStatistics.SettingTime">
             <summary>
             设置的时间
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.ClockId">
+            <summary>
+            打卡主键
             </summary>
         </member>
         <member name="P:Domain.ClockStatistics.LateTime">
@@ -305,6 +310,126 @@
         <member name="P:Domain.ClockStatistics.Leave">
             <summary>
             请假时长
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.AttendanceDay">
+            <summary>
+            应出勤天数
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.AttendanceTime">
+            <summary>
+            应出勤时长
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.ActualAttendanceDay">
+            <summary>
+            实出勤天数
+            </summary>
+        </member>
+        <member name="P:Domain.ClockStatistics.ActualAttendanceTime">
+            <summary>
+            实出勤时长
+            </summary>
+        </member>
+        <member name="T:Domain.MonthStatistics">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.MonthStatisticsId">
+            <summary>
+            打卡统计主键
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.IdCard">
+            <summary>
+            人员唯一编号
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.SettingTime">
+            <summary>
+            设置的时间
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.LateTime">
+            <summary>
+            迟到次数
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.LateMinutes">
+            <summary>
+            迟到时间
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.EarlyLeaveTimes">
+            <summary>
+            早退次数
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.EarlyLeaveMinutes">
+            <summary>
+            早退时间
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.NotClockInTimes">
+            <summary>
+            上班缺卡次数
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.NotClockOutTimes">
+            <summary>
+            下班缺卡次数
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.WorkingOvertime">
+            <summary>
+            工作日加班时长
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.RestOvertime">
+            <summary>
+            休息日加班时长
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.HolidayOvertime">
+            <summary>
+            节假日加班时长
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.Travel">
+            <summary>
+            出差时长
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.GoOut">
+            <summary>
+            外出时长
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.Holiday">
+            <summary>
+            出差时长
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.AttendanceDay">
+            <summary>
+            应出勤天数
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.AttendanceTime">
+            <summary>
+            应出勤时长
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.ActualAttendanceDay">
+            <summary>
+            实出勤天数
+            </summary>
+        </member>
+        <member name="P:Domain.MonthStatistics.ActualAttendanceTime">
+            <summary>
+            实出勤时长
             </summary>
         </member>
         <member name="T:Domain.SetingDaytable">
@@ -735,6 +860,26 @@
         <member name="P:Domain.HolidayManagement.Balance">
             <summary>
             调休上班日期
+            </summary>
+        </member>
+        <member name="P:Domain.HolidayManagement.CustomerId">
+            <summary>
+            所属客户编号
+            </summary>
+        </member>
+        <member name="T:Domain.Balance">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Domain.Balance.BalanceTime">
+            <summary>
+            调休上班日期
+            </summary>
+        </member>
+        <member name="P:Domain.Balance.BalanceShift">
+            <summary>
+            调休上班班次
             </summary>
         </member>
     </members>

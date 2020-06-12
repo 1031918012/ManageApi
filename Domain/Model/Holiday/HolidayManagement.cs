@@ -30,5 +30,24 @@ namespace Domain
         /// 调休上班日期
         /// </summary>
         public string Balance { get; set; }
+        /// <summary>
+        /// 所属客户编号
+        /// </summary>
+        public string CustomerId { get; set; }
+
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Balance
+    {
+        /// <summary>
+        /// 调休上班日期
+        /// </summary>
+        public string BalanceTime { get; set; }
+        /// <summary>
+        /// 调休上班班次
+        /// </summary>
+        public string BalanceShift { get; set; }
     }
 }

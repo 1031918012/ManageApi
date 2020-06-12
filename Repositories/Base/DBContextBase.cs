@@ -25,12 +25,24 @@ namespace Repositories
         public DbSet<ShiftDetail> ShiftDetailList { get; set; }
         public DbSet<Wifi> WifiList { get; set; }
         public DbSet<HolidayManagement> HolidayManagementList { get; set; }
+        public DbSet<MonthStatistics> MonthStatisticsList { get; set; }
 
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.ApplyConfiguration(new AttendanceGroupMap());
-        //    base.OnModelCreating(modelBuilder);
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new AttendanceGroupMap());
+            modelBuilder.ApplyConfiguration(new AddressMap());
+            modelBuilder.ApplyConfiguration(new ClockRecordMap());
+            modelBuilder.ApplyConfiguration(new ClockStatisticsMap());
+            modelBuilder.ApplyConfiguration(new HolidayManagementMap());
+            modelBuilder.ApplyConfiguration(new MonthStatisticsMap());
+            modelBuilder.ApplyConfiguration(new PersonGroupMap());
+            modelBuilder.ApplyConfiguration(new SchedulingMap());
+            modelBuilder.ApplyConfiguration(new SetingDaytableMap());
+            modelBuilder.ApplyConfiguration(new ShiftDetailMap());
+            modelBuilder.ApplyConfiguration(new ShiftMap());
+            modelBuilder.ApplyConfiguration(new WifiMap());
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

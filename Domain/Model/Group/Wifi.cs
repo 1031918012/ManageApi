@@ -20,7 +20,7 @@ namespace Domain
         /// <summary>
         /// Wifi名称
         /// </summary>
-        public int WifiName { get; set; }
+        public string WifiName { get; set; }
         /// <summary>
         /// Mac地址
         /// </summary>

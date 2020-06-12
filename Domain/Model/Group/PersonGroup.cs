@@ -24,7 +24,7 @@ namespace Domain
         /// <summary>
         /// 关联的考勤组
         /// </summary>
-        public string AttendanceGroupId { get; set; }
+        public int AttendanceGroupId { get; set; }
         /// <summary>
         /// 所属客户编号
         /// </summary>

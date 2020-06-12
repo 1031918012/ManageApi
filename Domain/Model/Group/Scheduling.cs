@@ -24,6 +24,6 @@ namespace Domain
         /// <summary>
         /// 班次id
         /// </summary>
-        public string ShiftId { get; set; }
+        public int ShiftId { get; set; }
     }
 }

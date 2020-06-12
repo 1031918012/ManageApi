@@ -33,15 +33,15 @@ namespace Domain
         /// <summary>
         /// 打卡地址
         /// </summary>
-        public string Address { get; set; }
+        public double Address { get; set; }
         /// <summary>
         /// 打卡精度
         /// </summary>
-        public string Latitude { get; set; }
+        public double Latitude { get; set; }
         /// <summary>
         /// 打卡纬度
         /// </summary>
-        public string Longitude { get; set; }
+        public double Longitude { get; set; }
         /// <summary>
         /// 打卡类型 内勤 外勤 补卡 
         /// </summary>

@@ -8,12 +8,12 @@ namespace Domain
     /// <summary>
     /// 
     /// </summary>
-    public class ClockStatistics : IAggregateRoot
+    public class MonthStatistics : IAggregateRoot
     {
         /// <summary>
         /// 打卡统计主键
         /// </summary>
-        public int ClockStatisticsId { get; set; }
+        public int MonthStatisticsId { get; set; }
         /// <summary>
         /// 人员唯一编号
         /// </summary>
@@ -22,10 +22,6 @@ namespace Domain
         /// 设置的时间
         /// </summary>
         public DateTime SettingTime { get; set; }
-        /// <summary>
-        /// 打卡主键
-        /// </summary>
-        public string ClockId { get; set; }
         /// <summary>
         /// 迟到次数
         /// </summary>
@@ -42,10 +38,6 @@ namespace Domain
         /// 早退时间
         /// </summary>
         public TimeSpan EarlyLeaveMinutes { get; set; }
-        /// <summary>
-        /// 工作时长
-        /// </summary>
-        public TimeSpan WorkTime { get; set; }
         /// <summary>
         /// 上班缺卡次数
         /// </summary>
@@ -67,10 +59,6 @@ namespace Domain
         /// </summary>
         public TimeSpan HolidayOvertime { get; set; }
         /// <summary>
-        /// 加班总时长
-        /// </summary>
-        public TimeSpan AllOvertime { get; set; }
-        /// <summary>
         /// 出差时长
         /// </summary>
         public TimeSpan Travel { get; set; }
@@ -79,9 +67,9 @@ namespace Domain
         /// </summary>
         public TimeSpan GoOut { get; set; }
         /// <summary>
-        /// 请假时长
+        /// 出差时长
         /// </summary>
-        public TimeSpan Leave { get; set; }
+        public TimeSpan Holiday { get; set; }
         /// <summary>
         /// 应出勤天数
         /// </summary>

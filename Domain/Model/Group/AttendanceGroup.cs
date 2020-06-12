@@ -34,7 +34,7 @@ namespace Domain
         /// <summary>
         /// 跨天时间
         /// </summary>
-        public string TimeAcrossDays { get; set; }
+        public TimeSpan TimeAcrossDays { get; set; }
         #endregion
         #region 按排班考勤类型
         /// <summary>
